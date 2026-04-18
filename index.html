@@ -78,7 +78,7 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 .team-cell-name{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--text)}
 .w-td{color:var(--green);font-family:'Oswald',sans-serif;font-size:14px;font-weight:600}
 .l-td{color:var(--red);font-family:'Oswald',sans-serif;font-size:14px;font-weight:600}
-.pct-td{color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500}
+.pct-td{color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;white-space:nowrap}
 .pos-td{color:var(--green);font-weight:600}
 .neg-td{color:var(--red);font-weight:600}
 .standings-footer{background:#eef0f7;padding:7px 16px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid var(--border)}
@@ -266,7 +266,7 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
         <th class="tl">Team</th>
         <th style="width:36px">W</th>
         <th style="width:36px">L</th>
-        <th style="width:52px">PCT</th>
+        <th style="width:64px">PCT</th>
         <th class="col-hide" style="width:40px">PF</th>
         <th class="col-hide" style="width:40px">PA</th>
         <th class="col-hide" style="width:44px">+/-</th>
@@ -452,7 +452,7 @@ function renderStandings(){
   const rows=calcStandings();
   document.getElementById('s-body').innerHTML=rows.map((t,i)=>{
     const gp=t.w+t.l,raw=gp?t.w/gp:0;
-    const pct=gp===0?'—':raw===1?'1.000':'.'+raw.toFixed(3).slice(2);
+    const pct=gp===0?'—':raw===1?'1.00':'.'+raw.toFixed(2).slice(2);
     const d=t.pf-t.pa,ds=d>0?'+'+d:d===0?'—':String(d);
     const dc=d>0?'pos-td':d<0?'neg-td':'';
     const wv=t.w%1===0?t.w:t.w.toFixed(1),lv=t.l%1===0?t.l:t.l.toFixed(1);
