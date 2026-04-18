@@ -106,9 +106,13 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 .empty{background:var(--panel);border:1px dashed var(--border2);padding:36px 20px;text-align:center;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px}
 
 /* ── BRACKET ── */
-.bracket-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px}
+.bracket-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:0}
+/* Full-screen bracket page — escapes main padding */
+#page-bracket{margin:-20px -16px;padding:0}
+.bracket-page-inner{padding:16px 16px 12px}
+.bracket-fullscreen{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--panel);border-top:1px solid var(--border);padding:16px}
 .bracket-grid{display:flex;align-items:flex-start;min-width:760px}
-.b-col{display:flex;flex-direction:column;min-width:175px}
+.b-col{display:flex;flex-direction:column;flex:1;min-width:160px}
 .b-col-hdr{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:#fff;padding:8px 6px;background:var(--nba-blue)}
 .b-col-hdr.finals{background:var(--nba-red)}
 .b-col-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;color:var(--text3);padding:4px 6px;background:#eef0f7;border-bottom:2px solid var(--border)}
@@ -184,8 +188,11 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 /* ── DESKTOP ── */
 @media (min-width:601px){
   .col-hide{display:table-cell}
-  .bracket-hint{display:none}
   .standings-table tbody td{padding:10px 12px}
+  .b-col{flex:1;min-width:0}
+  #page-bracket{margin:-28px -20px}
+  .bracket-page-inner{padding:28px 20px 12px}
+  .bracket-fullscreen{padding:16px 20px}
   .site-nav{display:flex}
   .bottom-nav{display:none!important}
 }
@@ -236,12 +243,17 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
   .pin-d{width:48px;height:54px;font-size:24px}
 
   /* Bracket */
-  .bracket-hint{display:block}
-  .b-col{min-width:140px}
+  .b-col{min-width:0;flex:1}
+  #page-bracket{margin:-12px -12px}
+  .bracket-page-inner{padding:12px 12px 8px}
+  .bracket-fullscreen{padding:10px 8px}
+  .b-col-hdr{font-size:10px;padding:7px 4px;letter-spacing:1px}
+  .b-col-sub{font-size:8px;padding:3px 4px}
+  .b-team-row{padding:6px 6px;margin:2px 4px;min-height:34px}
+  .b-team-row span{font-size:11px}
   .b-team-row{padding:7px 8px;margin:2px 6px}
 }
 
-.bracket-hint{background:#eef3ff;border:1px solid #c4d0ec;color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;padding:6px 12px;margin-bottom:10px;text-align:center}
 </style>
 </head>
 <body>
@@ -317,11 +329,12 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 
 <!-- BRACKET -->
 <div class="page" id="page-bracket">
-  <div class="ph">
-    <div><h1>Playoffs</h1><div class="ph-sub">// QF &amp; Semis: Best of 3 · Finals: Best of 5</div></div>
+  <div class="bracket-page-inner">
+    <div class="ph" style="margin-bottom:10px;padding-bottom:10px">
+      <div><h1>Playoffs</h1><div class="ph-sub">// QF &amp; Semis: Best of 3 &middot; Finals: Best of 5</div></div>
+    </div>
   </div>
-  <div class="bracket-hint">← Swipe to see full bracket →</div>
-  <div class="bracket-outer"><div id="bracket-view"></div></div>
+  <div class="bracket-fullscreen"><div id="bracket-view"></div></div>
 </div>
 
 <!-- ADMIN -->
@@ -696,7 +709,7 @@ function renderBracket(){
   const cv=[.75,2.25,4.75,6.25].map(v=>v*slotH);
   const sfC1=qfH*.25,sfC2=qfH*.75,fCtr=qfH/2;
 
-  let h=`<div class="bracket-grid">`;
+  let h=`<div class="bracket-grid" style="width:100%">`;
 
   // QF
   h+=`<div class="b-col"><div class="b-col-hdr">Quarterfinals</div><div class="b-col-sub">Best of 3</div><div class="b-body" style="height:${qfH}px">`;
