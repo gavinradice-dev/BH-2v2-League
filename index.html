@@ -56,7 +56,7 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 .ph-badge{background:var(--nba-red);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;flex-shrink:0;white-space:nowrap}
 
 /* ── STANDINGS ── */
-.standings-wrap{background:var(--panel);border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.standings-wrap{background:var(--panel);border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,0.06)}
 .standings-hdr{background:var(--nba-blue);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
 .standings-hdr-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff}
 .standings-hdr-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px}
@@ -204,10 +204,12 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
   .ph-sub{font-size:9px;letter-spacing:1px}
   .ph-badge{font-size:10px;padding:4px 8px}
 
-  /* Standings — hide PF PA +/- */
-  .col-hide{display:none}
-  .standings-table thead th{padding:7px 6px;font-size:10px;letter-spacing:.5px}
-  .standings-table tbody td{padding:10px 6px;font-size:12px}
+  /* Standings — horizontally scrollable so all columns show */
+  .col-hide{display:table-cell}
+  .standings-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .standings-table{min-width:500px;table-layout:auto}
+  .standings-table thead th{padding:7px 5px;font-size:10px;letter-spacing:.5px}
+  .standings-table tbody td{padding:9px 5px;font-size:12px}
   .team-cell-name{font-size:12px}
   .standings-hdr-sub{display:none}
   .standings-footer{font-size:8px;letter-spacing:1px}
@@ -454,15 +456,66 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 </nav>
 
 <script>
-const CODE='1243',SK='bhjv2_';
+const CODE='1243';
+const DB='https://bh2v2-1fef4-default-rtdb.firebaseio.com';
 let unlocked=false;
 
-function ld(k){try{return JSON.parse(localStorage.getItem(SK+k))}catch(e){return null}}
-function sv(k,v){try{localStorage.setItem(SK+k,JSON.stringify(v))}catch(e){}}
-function getTeams(){return ld('teams')||['Buckets & Boards','Run & Gun','The Rim Rockers','Zone Busters','Full Court Press','Splash Bros','Pick & Roll','Hoops Dynasty']}
-function getSched(){return ld('sched')||[]}
-function getRes(){return ld('res')||[]}
-function getPO(){return ld('po')||{}}
+// In-memory cache — Firebase pushes updates into these
+let _teams=['Buckets & Boards','Run & Gun','The Rim Rockers','Zone Busters','Full Court Press','Splash Bros','Pick & Roll','Hoops Dynasty'];
+let _sched=[];
+let _res=[];
+let _po={};
+
+function getTeams(){return _teams}
+function getSched(){return _sched}
+function getRes(){return _res}
+function getPO(){return _po}
+
+// ── Firebase REST helpers ──
+async function fbGet(path){
+  try{
+    const r=await fetch(DB+path+'.json');
+    const d=await r.json();
+    return d;
+  }catch(e){return null}
+}
+async function fbSet(path,val){
+  try{
+    await fetch(DB+path+'.json',{method:'PUT',body:JSON.stringify(val),headers:{'Content-Type':'application/json'}});
+  }catch(e){toast('Save failed — check connection')}
+}
+
+// ── Load all data from Firebase then render ──
+async function loadAll(){
+  showLoading(true);
+  const [teams,sched,res,po]=await Promise.all([
+    fbGet('/teams'),fbGet('/sched'),fbGet('/res'),fbGet('/po')
+  ]);
+  if(teams&&Array.isArray(teams)) _teams=teams;
+  _sched=sched?Object.values(sched):[];
+  _res=res?Object.values(res):[];
+  _po=po||{};
+  showLoading(false);
+  renderStandings();
+  renderSchedule();
+  renderResults();
+  renderBracket();
+  if(unlocked) renderAdminPanel();
+}
+
+function showLoading(on){
+  let el=document.getElementById('loading-bar');
+  if(!el){
+    el=document.createElement('div');
+    el.id='loading-bar';
+    el.style.cssText='position:fixed;top:0;left:0;right:0;height:3px;background:var(--nba-red);z-index:9999;transition:opacity .3s';
+    document.body.appendChild(el);
+  }
+  el.style.opacity=on?'1':'0';
+}
+
+// Poll Firebase every 15 seconds for live updates
+setInterval(loadAll, 15000);
 
 function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500)}
 
@@ -571,15 +624,17 @@ function seriesWinner(key,t1,t2,needed){
   if(w2>=needed)return t2;
   return'';
 }
-function addSeriesGame(key,winner){
-  const po=getPO();
-  if(!po['series_'+key])po['series_'+key]=[];
-  po['series_'+key].push(winner);
-  sv('po',po);renderBracket();if(unlocked)renderPoAdmin();toast('Game recorded!');
+async function addSeriesGame(key,winner){
+  if(!_po['series_'+key])_po['series_'+key]=[];
+  _po['series_'+key].push(winner);
+  await fbSet('/po',_po);
+  renderBracket();if(unlocked)renderPoAdmin();toast('Game recorded!');
 }
-function removeLastSeriesGame(key){
-  const po=getPO();
-  if(po['series_'+key]&&po['series_'+key].length>0){po['series_'+key].pop();sv('po',po);}
+async function removeLastSeriesGame(key){
+  if(_po['series_'+key]&&_po['series_'+key].length>0){
+    _po['series_'+key].pop();
+    await fbSet('/po',_po);
+  }
   renderBracket();if(unlocked)renderPoAdmin();toast('Last game removed');
 }
 
@@ -768,49 +823,74 @@ function renderAdminPanel(){
   document.getElementById('rg-date').value=today;
   renderManageSched();renderManageRes();renderPoAdmin();
 }
-function saveTeams(){
+async function saveTeams(){
   const names=Array.from(document.querySelectorAll('.team-inp')).map(i=>i.value.trim()).filter(Boolean);
   if(names.length!==8){toast('Need exactly 8 team names');return;}
-  sv('teams',names);renderAdminPanel();renderStandings();toast('Team names saved!');
+  _teams=names;
+  await fbSet('/teams',names);
+  renderAdminPanel();renderStandings();toast('Team names saved!');
 }
-function addGame(){
+async function addGame(){
   const t1=document.getElementById('sg-t1').value,t2=document.getElementById('sg-t2').value;
   const date=document.getElementById('sg-date').value,time=document.getElementById('sg-time').value;
   const dayLabel=document.getElementById('sg-day').value.trim()||'Day 1';
   if(t1===t2){toast('Teams must be different');return;}
   if(!date){toast('Pick a date');return;}
-  const s=getSched();s.push({id:Date.now(),t1,t2,date,time,dayLabel});
-  sv('sched',s);renderManageSched();toast('Game added!');
+  const id=Date.now();
+  const game={id,t1,t2,date,time,dayLabel};
+  _sched.push(game);
+  // Store as object keyed by id for Firebase
+  const schedObj={};
+  _sched.forEach(g=>{schedObj['g'+g.id]=g});
+  await fbSet('/sched',schedObj);
+  renderManageSched();renderSchedule();toast('Game added!');
 }
-function delGame(id){sv('sched',getSched().filter(g=>g.id!==id));renderManageSched();toast('Game removed')}
+async function delGame(id){
+  _sched=_sched.filter(g=>g.id!==id);
+  const schedObj={};
+  _sched.forEach(g=>{schedObj['g'+g.id]=g});
+  await fbSet('/sched',Object.keys(schedObj).length?schedObj:null);
+  renderManageSched();renderSchedule();toast('Game removed');
+}
 function renderManageSched(){
-  const s=getSched().slice().sort((a,b)=>(a.dayLabel||'')>(b.dayLabel||'')?1:-1);
+  const s=_sched.slice().sort((a,b)=>(a.dayLabel||'')>(b.dayLabel||'')?1:-1);
   const el=document.getElementById('manage-sched');
   if(!s.length){el.innerHTML='<div style="color:var(--text3);font-size:13px;font-family:\'IBM Plex Mono\',monospace">No scheduled games</div>';return;}
   el.innerHTML=s.map(g=>`<div class="m-item"><span>${g.dayLabel||'?'} · ${fmtDate(g.date)}${g.time?' '+fmtTime(g.time):''} — ${g.t1} vs ${g.t2}</span><button class="btn-d" onclick="delGame(${g.id})">Remove</button></div>`).join('');
 }
-function addResult(){
+async function addResult(){
   const t1=document.getElementById('rg-t1').value,t2=document.getElementById('rg-t2').value;
   const s1=document.getElementById('rg-s1').value,s2=document.getElementById('rg-s2').value;
   const date=document.getElementById('rg-date').value;
   if(t1===t2){toast('Teams must be different');return;}
   if(s1===''||s2===''){toast('Enter both scores');return;}
   if(!date){toast('Set a date');return;}
-  const res=getRes();res.push({id:Date.now(),t1,t2,s1:parseInt(s1),s2:parseInt(s2),date});
-  sv('res',res);
+  const id=Date.now();
+  _res.push({id,t1,t2,s1:parseInt(s1),s2:parseInt(s2),date});
+  const resObj={};
+  _res.forEach(r=>{resObj['r'+r.id]=r});
+  await fbSet('/res',resObj);
   document.getElementById('rg-s1').value='';document.getElementById('rg-s2').value='';
   renderManageRes();renderStandings();toast('Result saved!');
 }
-function delRes(id){sv('res',getRes().filter(r=>r.id!==id));renderManageRes();renderStandings();toast('Deleted')}
+async function delRes(id){
+  _res=_res.filter(r=>r.id!==id);
+  const resObj={};
+  _res.forEach(r=>{resObj['r'+r.id]=r});
+  await fbSet('/res',Object.keys(resObj).length?resObj:null);
+  renderManageRes();renderStandings();toast('Deleted');
+}
 function renderManageRes(){
-  const res=getRes().slice().sort((a,b)=>b.date>a.date?1:-1);
+  const res=_res.slice().sort((a,b)=>b.date>a.date?1:-1);
   const el=document.getElementById('manage-res');
   if(!res.length){el.innerHTML='<div style="color:var(--text3);font-size:13px;font-family:\'IBM Plex Mono\',monospace">No results logged</div>';return;}
   el.innerHTML=res.map(r=>`<div class="m-item"><span>${fmtDate(r.date)} — ${r.t1} ${r.s1}–${r.s2} ${r.t2}</span><button class="btn-d" onclick="delRes(${r.id})">Delete</button></div>`).join('');
 }
-function resetAll(){
+async function resetAll(){
   if(!confirm('Reset ALL data? Cannot be undone.'))return;
-  ['teams','sched','res','po'].forEach(k=>localStorage.removeItem(SK+k));
+  _teams=['Buckets & Boards','Run & Gun','The Rim Rockers','Zone Busters','Full Court Press','Splash Bros','Pick & Roll','Hoops Dynasty'];
+  _sched=[];_res=[];_po={};
+  await Promise.all([fbSet('/teams',_teams),fbSet('/sched',null),fbSet('/res',null),fbSet('/po',null)]);
   renderStandings();renderAdminPanel();toast('All data reset');
 }
 
@@ -823,14 +903,13 @@ function applyDevice(){
 applyDevice();
 window.addEventListener('resize',applyDevice);
 
-// Also sync goAdmin to highlight bottom nav admin btn
-const _goAdmin=goAdmin;
 function goAdmin(){
   document.getElementById('nav-admin').style.display='';
   showTab('admin');
 }
 
-renderStandings();
+// Load everything from Firebase on startup
+loadAll();
 </script>
 </body>
 </html>
