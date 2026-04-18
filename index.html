@@ -171,50 +171,74 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 .toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:16px;left:16px;max-width:320px;margin:0 auto;background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;padding:12px 18px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;box-shadow:0 4px 20px rgba(29,66,138,.3);text-align:center}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* ── MOBILE OVERRIDES ── */
-@media (max-width:600px){
-  .header-inner{padding:0 14px;height:54px}
-  .logo-name{font-size:16px}
-  .logo-sub{display:none}
-  .nba-ball{width:32px;height:32px}
-  .admin-pill{font-size:9px;padding:6px 10px}
-  .nav-btn{font-size:12px;padding:10px 13px;letter-spacing:1.5px}
-  main{padding:14px 12px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
-  .ph{margin-bottom:14px;padding-bottom:10px}
-  .ph h1{font-size:24px}
-  .ph-sub{font-size:9px;letter-spacing:1px}
+/* ── BOTTOM NAV (mobile only, injected by JS) ── */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--nba-blue);border-top:2px solid var(--nba-red);padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav.show{display:flex}
+.bn-btn{flex:1;background:none;border:none;color:rgba(255,255,255,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px 6px;cursor:pointer;gap:3px;transition:color .15s;min-height:52px}
+.bn-btn.active{color:#fff}
+.bn-btn.active .bn-dot{background:var(--nba-red)}
+.bn-icon{font-size:18px;line-height:1}
+.bn-label{font-family:'Oswald',sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+.bn-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:background .15s}
 
-  /* Standings: hide PF PA +/- on tiny screens, keep rank team W L PCT */
-  .col-hide{display:none}
-  .standings-table thead th{padding:7px 8px;font-size:10px;letter-spacing:1px}
-  .standings-table tbody td{padding:9px 8px;font-size:12px}
-  .team-cell-name{font-size:13px}
-
-  /* Cards */
-  .sched-main{padding:10px 12px}
-  .sched-teams{font-size:13px;gap:6px}
-  .sched-time{font-size:10px;padding:3px 7px}
-  .res-main{padding:10px 12px}
-  .res-teams{font-size:13px;gap:6px}
-  .score-pill{font-size:12px;padding:4px 10px;letter-spacing:1.5px}
-  .res-date-strip{min-width:46px;font-size:9px;padding:0 8px}
-
-  /* Admin forms */
-  .f-g2{grid-template-columns:1fr}
-  .teams-g{grid-template-columns:1fr}
-  .f-gvs{grid-template-columns:1fr 28px 1fr;gap:6px}
-  .a-body{padding:14px 12px}
-  .btn-p{width:100%}
-  .game-win-row .btn-p{flex:1}
-
-  /* Bracket scroll hint */
-  .bracket-hint{display:block}
-}
+/* ── DESKTOP ── */
 @media (min-width:601px){
   .col-hide{display:table-cell}
   .bracket-hint{display:none}
   .standings-table tbody td{padding:10px 12px}
+  .site-nav{display:flex}
+  .bottom-nav{display:none!important}
 }
+
+/* ── MOBILE ── */
+@media (max-width:600px){
+  .site-nav{display:none}
+  .header-inner{padding:0 14px;height:52px}
+  .logo-name{font-size:15px;letter-spacing:.5px}
+  .logo-sub{display:none}
+  .nba-ball{width:30px;height:30px}
+  .admin-pill{font-size:9px;padding:6px 10px;letter-spacing:.5px}
+  main{padding:12px 12px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  .ph{margin-bottom:12px;padding-bottom:10px;flex-direction:column;align-items:flex-start;gap:6px}
+  .ph h1{font-size:26px}
+  .ph-sub{font-size:9px;letter-spacing:1px}
+  .ph-badge{font-size:10px;padding:4px 8px}
+
+  /* Standings — hide PF PA +/- */
+  .col-hide{display:none}
+  .standings-table thead th{padding:7px 6px;font-size:10px;letter-spacing:.5px}
+  .standings-table tbody td{padding:10px 6px;font-size:12px}
+  .team-cell-name{font-size:12px}
+  .standings-hdr-sub{display:none}
+  .standings-footer{font-size:8px;letter-spacing:1px}
+
+  /* Game cards */
+  .sched-card,.res-card{border-radius:0;margin-bottom:5px}
+  .sched-main,.res-main{padding:11px 12px}
+  .sched-teams,.res-teams{font-size:14px;gap:5px}
+  .sched-time{font-size:10px;padding:3px 7px}
+  .score-pill{font-size:12px;padding:4px 10px;letter-spacing:1px}
+  .res-date-strip{min-width:44px;font-size:9px;padding:0 8px}
+  .day-chip{font-size:12px;padding:4px 10px}
+
+  /* Admin forms — stack everything */
+  .f-g2{grid-template-columns:1fr}
+  .teams-g{grid-template-columns:1fr}
+  .f-gvs{grid-template-columns:1fr 28px 1fr;gap:6px}
+  .a-body{padding:14px 12px}
+  .btn-p{width:100%;font-size:15px}
+  .game-win-row .btn-p{flex:1;min-width:0}
+  .series-block{padding:12px}
+  .a-section{margin-bottom:10px}
+  .lock-card{padding:28px 20px}
+  .pin-d{width:48px;height:54px;font-size:24px}
+
+  /* Bracket */
+  .bracket-hint{display:block}
+  .b-col{min-width:140px}
+  .b-team-row{padding:7px 8px;margin:2px 6px}
+}
+
 .bracket-hint{background:#eef3ff;border:1px solid #c4d0ec;color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;padding:6px 12px;margin-bottom:10px;text-align:center}
 </style>
 </head>
@@ -400,6 +424,35 @@ main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + 
 </main>
 <div class="toast" id="toast"></div>
 
+<!-- MOBILE BOTTOM NAV -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bn-btn active" id="bn-standings" onclick="showTab('standings')">
+    <div class="bn-icon">📊</div>
+    <div class="bn-label">Standings</div>
+    <div class="bn-dot"></div>
+  </button>
+  <button class="bn-btn" id="bn-schedule" onclick="showTab('schedule')">
+    <div class="bn-icon">📅</div>
+    <div class="bn-label">Schedule</div>
+    <div class="bn-dot"></div>
+  </button>
+  <button class="bn-btn" id="bn-results" onclick="showTab('results')">
+    <div class="bn-icon">🏀</div>
+    <div class="bn-label">Results</div>
+    <div class="bn-dot"></div>
+  </button>
+  <button class="bn-btn" id="bn-bracket" onclick="showTab('bracket')">
+    <div class="bn-icon">🏆</div>
+    <div class="bn-label">Playoffs</div>
+    <div class="bn-dot"></div>
+  </button>
+  <button class="bn-btn" id="bn-admin" onclick="goAdmin()">
+    <div class="bn-icon">⚙️</div>
+    <div class="bn-label">Admin</div>
+    <div class="bn-dot"></div>
+  </button>
+</nav>
+
 <script>
 const CODE='1243',SK='bhjv2_';
 let unlocked=false;
@@ -416,8 +469,10 @@ function toast(m){const el=document.getElementById('toast');el.textContent=m;el.
 function showTab(t){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+t).classList.add('active');
   const nb=document.getElementById('nav-'+t);if(nb)nb.classList.add('active');
+  const bb=document.getElementById('bn-'+t);if(bb)bb.classList.add('active');
   window.scrollTo(0,0);
   if(t==='standings')renderStandings();
   if(t==='schedule')renderSchedule();
@@ -757,6 +812,22 @@ function resetAll(){
   if(!confirm('Reset ALL data? Cannot be undone.'))return;
   ['teams','sched','res','po'].forEach(k=>localStorage.removeItem(SK+k));
   renderStandings();renderAdminPanel();toast('All data reset');
+}
+
+// Device detection — show bottom nav on mobile, top nav on desktop
+function isMobile(){return window.innerWidth<=600||/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)}
+function applyDevice(){
+  const mobile=isMobile();
+  document.getElementById('bottom-nav').classList.toggle('show',mobile);
+}
+applyDevice();
+window.addEventListener('resize',applyDevice);
+
+// Also sync goAdmin to highlight bottom nav admin btn
+const _goAdmin=goAdmin;
+function goAdmin(){
+  document.getElementById('nav-admin').style.display='';
+  showTab('admin');
 }
 
 renderStandings();
