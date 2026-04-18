@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1d428a">
 <title>BH JV 2v2 League</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --nba-blue:#1d428a;
   --nba-red:#c8102e;
-  --nba-silver:#bfc0bf;
   --bg:#f2f3f5;
-  --white:#fff;
   --panel:#fff;
   --border:#e2e4ea;
   --border2:#c8cad4;
@@ -22,186 +23,199 @@
   --red:#b8001a;
   --stripe:#f7f8fc;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* HEADER */
-header{background:var(--nba-blue);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:62px}
-.logo{display:flex;align-items:center;gap:14px}
-.nba-ball{width:40px;height:40px;flex-shrink:0}
-.logo-text{}
-.logo-name{font-family:'Oswald',sans-serif;font-size:21px;font-weight:700;color:#fff;letter-spacing:1px;line-height:1;text-transform:uppercase}
-.logo-sub{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;font-family:'IBM Plex Mono',monospace}
-.admin-pill{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:all .2s}
-.admin-pill:hover,.admin-pill.active{border-color:rgba(255,255,255,0.7);color:#fff;background:rgba(255,255,255,0.08)}
+/* ── HEADER ── */
+header{background:var(--nba-blue);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px}
+.logo{display:flex;align-items:center;gap:12px;min-width:0}
+.nba-ball{width:36px;height:36px;flex-shrink:0}
+.logo-text{min-width:0}
+.logo-name{font-family:'Oswald',sans-serif;font-size:19px;font-weight:700;color:#fff;letter-spacing:1px;line-height:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-sub{font-size:9px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+.admin-pill{background:none;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:7px 12px;cursor:pointer;transition:all .2s;flex-shrink:0;border-radius:2px;min-height:36px;display:flex;align-items:center}
+.admin-pill:hover,.admin-pill.active{border-color:rgba(255,255,255,0.8);color:#fff;background:rgba(255,255,255,0.1)}
 
-/* NAV */
-.site-nav{background:linear-gradient(to bottom,#1a3d80,#162f66);border-top:1px solid rgba(255,255,255,0.08);display:flex;padding:0 20px;overflow-x:auto}
+/* ── NAV ── */
+.site-nav{background:linear-gradient(to bottom,#1a3d80,#162f66);border-top:1px solid rgba(255,255,255,0.08);display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .site-nav::-webkit-scrollbar{display:none}
-.nav-btn{background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:11px 18px;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
-.nav-btn:hover{color:rgba(255,255,255,0.85)}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:11px 16px;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;min-height:44px}
 .nav-btn.active{color:#fff;border-bottom-color:var(--nba-red)}
 .red-bar{height:3px;background:var(--nba-red)}
 
-/* MAIN */
-main{max-width:960px;margin:0 auto;padding:28px 20px}
+/* ── MAIN ── */
+main{max-width:960px;margin:0 auto;padding:20px 16px;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
 .page{display:none}.page.active{display:block}
 
-/* PAGE HEADER */
-.ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid var(--nba-blue)}
-.ph h1{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);line-height:1}
-.ph-sub{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;font-family:'IBM Plex Mono',monospace}
-.ph-badge{background:var(--nba-red);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;flex-shrink:0}
+/* ── PAGE HEADER ── */
+.ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;padding-bottom:12px;border-bottom:3px solid var(--nba-blue);gap:10px;flex-wrap:wrap}
+.ph h1{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);line-height:1}
+.ph-sub{font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;font-family:'IBM Plex Mono',monospace}
+.ph-badge{background:var(--nba-red);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;flex-shrink:0;white-space:nowrap}
 
-/* NBA STANDINGS */
-.standings-wrap{background:var(--panel);border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.07)}
-.standings-hdr{background:var(--nba-blue);padding:11px 18px;display:flex;align-items:center;justify-content:space-between}
-.standings-hdr-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#fff}
+/* ── STANDINGS ── */
+.standings-wrap{background:var(--panel);border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.standings-hdr{background:var(--nba-blue);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.standings-hdr-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff}
 .standings-hdr-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px}
-.standings-table{width:100%;border-collapse:collapse}
-.standings-table thead th{background:#eef0f7;color:var(--text3);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;text-align:center;border-bottom:2px solid var(--border);border-right:1px solid var(--border)}
+.standings-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.standings-table thead th{background:#eef0f7;color:var(--text3);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 10px;text-align:center;border-bottom:2px solid var(--border);border-right:1px solid var(--border)}
 .standings-table thead th.tl{text-align:left}
 .standings-table thead th:last-child{border-right:none}
-.standings-table tbody td{padding:11px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:center;font-size:14px;color:var(--text2);vertical-align:middle}
+.standings-table tbody td{padding:10px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:center;font-size:13px;color:var(--text2);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .standings-table tbody td:last-child{border-right:none}
 .standings-table tbody td.tl{text-align:left}
 .standings-table tbody tr:nth-child(even) td{background:var(--stripe)}
-.standings-table tbody tr:hover td{background:#edf1ff}
 .standings-table tbody tr:last-child td{border-bottom:none}
 .rank-wrap{display:flex;align-items:center;justify-content:center}
-.rank-num{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;color:var(--text3)}
+.rank-num{width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;color:var(--text3)}
 .rank-1 .rank-num{background:var(--nba-blue);color:#fff}
 .rank-2 .rank-num{background:#1a3a7a;color:#fff}
 .rank-3 .rank-num{background:#264d8e;color:#fff}
 .rank-4 .rank-num{background:#3260a2;color:#fff}
-.team-cell-name{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text)}
-.w-td{color:var(--green);font-family:'Oswald',sans-serif;font-size:15px;font-weight:600}
-.l-td{color:var(--red);font-family:'Oswald',sans-serif;font-size:15px;font-weight:600}
-.pct-td{color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500}
+.team-cell-name{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--text)}
+.w-td{color:var(--green);font-family:'Oswald',sans-serif;font-size:14px;font-weight:600}
+.l-td{color:var(--red);font-family:'Oswald',sans-serif;font-size:14px;font-weight:600}
+.pct-td{color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500}
 .pos-td{color:var(--green);font-weight:600}
 .neg-td{color:var(--red);font-weight:600}
-.standings-footer{background:#eef0f7;padding:8px 18px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid var(--border)}
+.standings-footer{background:#eef0f7;padding:7px 16px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid var(--border)}
 
-/* SCHEDULE */
-.day-group{margin-bottom:30px}
-.day-hdr{display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.day-chip{background:var(--nba-blue);color:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;flex-shrink:0}
+/* ── SCHEDULE / RESULTS ── */
+.day-group{margin-bottom:24px}
+.day-hdr{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.day-chip{background:var(--nba-blue);color:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;flex-shrink:0}
 .day-chip-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.5px}
 .day-rule{flex:1;height:2px;background:var(--nba-blue);opacity:.12}
-.sched-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;transition:box-shadow .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-.sched-card:hover{box-shadow:0 3px 12px rgba(29,66,138,0.12)}
-.sched-num{background:var(--nba-blue);color:rgba(255,255,255,0.6);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;padding:0 12px;display:flex;align-items:center;justify-content:center;min-width:42px;letter-spacing:1px}
-.sched-main{flex:1;padding:13px 18px;display:flex;align-items:center;gap:12px}
-.sched-teams{flex:1;font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px;color:var(--text)}
-.sched-vs{font-size:11px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace;letter-spacing:1px}
-.sched-time{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--nba-blue);background:#eef3ff;border:1px solid #c4d0ec;padding:4px 10px;flex-shrink:0}
-
-/* RESULTS */
-.res-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;transition:box-shadow .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-.res-card:hover{box-shadow:0 3px 12px rgba(29,66,138,0.1)}
-.res-date-strip{background:#eef0f7;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0 12px;display:flex;align-items:center;justify-content:center;min-width:62px;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid var(--border);text-align:center;line-height:1.4}
-.res-main{flex:1;padding:13px 18px;display:flex;align-items:center;gap:12px}
-.res-teams{flex:1;font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
-.res-vs{font-size:11px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace}
+.sched-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.sched-num{background:var(--nba-blue);color:rgba(255,255,255,0.6);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;padding:0 10px;display:flex;align-items:center;justify-content:center;min-width:38px;letter-spacing:1px;flex-shrink:0}
+.sched-main{flex:1;padding:12px 14px;display:flex;align-items:center;gap:10px;min-width:0}
+.sched-teams{flex:1;font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;display:flex;align-items:center;gap:8px;color:var(--text);min-width:0;flex-wrap:wrap}
+.sched-vs{font-size:10px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace;letter-spacing:1px;flex-shrink:0}
+.sched-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--nba-blue);background:#eef3ff;border:1px solid #c4d0ec;padding:4px 8px;flex-shrink:0;white-space:nowrap}
+.res-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.res-date-strip{background:#eef0f7;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0 10px;display:flex;align-items:center;justify-content:center;min-width:54px;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid var(--border);text-align:center;line-height:1.4;flex-shrink:0}
+.res-main{flex:1;padding:12px 14px;display:flex;align-items:center;gap:10px;min-width:0}
+.res-teams{flex:1;font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+.res-vs{font-size:10px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
 .win-nm{color:var(--nba-blue)}
 .loss-nm{color:var(--text3);font-weight:400}
-.score-pill{background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;padding:5px 14px;letter-spacing:2px;white-space:nowrap}
+.score-pill{background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;padding:5px 12px;letter-spacing:2px;white-space:nowrap;flex-shrink:0}
+.empty{background:var(--panel);border:1px dashed var(--border2);padding:36px 20px;text-align:center;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px}
 
-/* BRACKET */
-.bracket-outer{overflow-x:auto;padding-bottom:16px}
-.bracket-grid{display:flex;align-items:flex-start;min-width:940px}
-.b-col{display:flex;flex-direction:column;min-width:190px}
-.b-col-hdr{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:#fff;padding:9px 8px;background:var(--nba-blue)}
+/* ── BRACKET ── */
+.bracket-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px}
+.bracket-grid{display:flex;align-items:flex-start;min-width:760px}
+.b-col{display:flex;flex-direction:column;min-width:175px}
+.b-col-hdr{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:#fff;padding:8px 6px;background:var(--nba-blue)}
 .b-col-hdr.finals{background:var(--nba-red)}
-.b-col-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--text3);padding:5px 8px;background:#eef0f7;border-bottom:2px solid var(--border)}
+.b-col-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;color:var(--text3);padding:4px 6px;background:#eef0f7;border-bottom:2px solid var(--border)}
 .b-col-sub.finals{background:#fff3f4;border-bottom-color:var(--nba-red)}
 .b-body{display:flex;flex-direction:column;justify-content:space-around;background:var(--panel);border-left:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
 .b-body.finals{border-left:2px solid var(--nba-red);border-right:2px solid var(--nba-red);border-bottom:2px solid var(--nba-red)}
 .b-matchup{display:flex;flex-direction:column;padding:4px 0}
-.b-team{display:flex;align-items:center;gap:8px;padding:8px 10px;margin:2px 8px;border:1px solid var(--border);background:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:174px;transition:all .15s}
-.b-team.winner{background:var(--nba-blue);color:#fff;border-color:var(--nba-blue)}
-.b-team.winner-red{background:var(--nba-red);color:#fff;border-color:var(--nba-red)}
-.b-team.tbd{color:var(--text3);font-weight:400;font-style:italic;background:#fafbff;border-style:dashed}
-.b-seed{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:12px;flex-shrink:0}
-.b-team.winner .b-seed,.b-team.winner-red .b-seed{color:rgba(255,255,255,0.5)}
-.b-series-row{display:flex;align-items:center;justify-content:space-between;padding:4px 10px 6px;gap:6px}
-.b-series-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
-.b-series-label.live{color:var(--nba-blue);font-weight:700}
-.b-series-label.won{color:var(--nba-red);font-weight:700}
-.b-dots{display:flex;gap:3px;align-items:center}
-.b-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--border2);background:#fff;flex-shrink:0}
-.b-dot.filled{background:var(--nba-blue);border-color:var(--nba-blue)}
-.b-dot.filled-red{background:var(--nba-red);border-color:var(--nba-red)}
 .b-team-row{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:8px 10px;margin:2px 8px;border:1px solid var(--border);background:#fff;transition:all .15s;min-height:38px}
 .b-team-row.winner{background:var(--nba-blue);border-color:var(--nba-blue)}
 .b-team-row.winner-red{background:var(--nba-red);border-color:var(--nba-red)}
 .b-team-row.tbd{background:#fafbff;border-style:dashed}
-.b-team-left{display:flex;align-items:center;gap:6px;overflow:hidden;flex:1;min-width:0}
-.b-team-wins{display:flex;gap:3px;flex-shrink:0}
-.b-win-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.4);background:transparent;flex-shrink:0}
-.b-win-dot.scored{background:#fff;border-color:#fff}
-.b-win-dot.scored-empty{background:transparent;border-color:rgba(255,255,255,0.35)}
-.b-team-row:not(.winner):not(.winner-red) .b-win-dot{border-color:var(--border2);background:transparent}
-.b-team-row:not(.winner):not(.winner-red) .b-win-dot.scored{background:var(--nba-blue);border-color:var(--nba-blue)}
+.b-team-left{display:flex;align-items:center;gap:5px;overflow:hidden;flex:1;min-width:0}
 .b-series-divider{height:1px;background:var(--border);margin:0 8px}
 .conn{flex-shrink:0;margin-top:37px}
-.champ-col{display:flex;flex-direction:column;min-width:172px}
-.champ-body{flex:1;display:flex;align-items:center;justify-content:center;background:var(--panel);border:2px solid var(--nba-red);border-top:none;padding:24px 12px}
-.champ-box{text-align:center}
-.champ-trophy{font-size:36px;margin-bottom:8px}
-.champ-lbl{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.champ-name{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--nba-blue);letter-spacing:1px;text-transform:uppercase;word-break:break-word;line-height:1.2}
 
-/* EMPTY */
-.empty{background:var(--panel);border:1px dashed var(--border2);padding:44px;text-align:center;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px}
-
-/* ADMIN LOCK */
-.lock-wrap{display:flex;align-items:center;justify-content:center;min-height:340px}
-.lock-card{background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 28px rgba(29,66,138,0.12);padding:40px 36px;max-width:320px;width:100%;text-align:center}
-.lock-icon-wrap{width:56px;height:56px;background:var(--nba-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px}
-.lock-title{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);margin-bottom:4px}
-.lock-sub{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;margin-bottom:26px}
-.pin-row{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
-.pin-d{width:54px;height:60px;background:#f2f4fc;border:2px solid var(--border2);color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;text-align:center;outline:none;transition:border-color .15s}
+/* ── ADMIN LOCK ── */
+.lock-wrap{display:flex;align-items:center;justify-content:center;min-height:300px;padding:20px}
+.lock-card{background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 28px rgba(29,66,138,0.12);padding:36px 28px;max-width:300px;width:100%;text-align:center}
+.lock-icon-wrap{width:52px;height:52px;background:var(--nba-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px}
+.lock-title{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);margin-bottom:4px}
+.lock-sub{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;margin-bottom:22px}
+.pin-row{display:flex;gap:10px;justify-content:center;margin-bottom:18px}
+.pin-d{width:52px;height:58px;background:#f2f4fc;border:2px solid var(--border2);color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;text-align:center;outline:none;transition:border-color .15s;border-radius:4px}
 .pin-d:focus,.pin-d.on{border-color:var(--nba-blue);background:#eaf0ff}
-.btn-unlock{width:100%;background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px;cursor:pointer;transition:opacity .15s}
-.btn-unlock:hover{opacity:.88}
+.btn-unlock{width:100%;background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px;cursor:pointer;transition:opacity .15s;min-height:50px}
+.btn-unlock:active{opacity:.88}
 .pin-err{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:10px;height:16px;letter-spacing:1px}
 
-/* ADMIN PANEL */
+/* ── ADMIN PANEL ── */
 .a-panel{display:none}
-.a-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.a-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px}
 .a-section{background:var(--panel);border:1px solid var(--border);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
-.a-hdr{background:var(--nba-blue);padding:10px 18px}
+.a-hdr{background:var(--nba-blue);padding:10px 16px}
 .a-hdr.red{background:var(--nba-red)}
 .a-hdr span{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff}
-.a-body{padding:20px 18px}
+.a-body{padding:16px}
 .f-label{display:block;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;font-family:'IBM Plex Mono',monospace}
-.f-input,.f-select{background:#f8f9fd;border:1px solid var(--border2);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:9px 12px;width:100%;outline:none;transition:border-color .15s}
+.f-input,.f-select{background:#f8f9fd;border:1px solid var(--border2);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;padding:11px 12px;width:100%;outline:none;transition:border-color .15s;border-radius:0;-webkit-appearance:none;appearance:none}
 .f-input:focus,.f-select:focus{border-color:var(--nba-blue);background:#fff}
+.f-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238888a0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .f-select option{background:#fff}
 .f-row{margin-bottom:12px}
 .f-g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.f-gvs{display:grid;grid-template-columns:1fr 36px 1fr;gap:8px;align-items:end}
-.vs-m{text-align:center;padding-bottom:10px;font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace}
+.f-gvs{display:grid;grid-template-columns:1fr 32px 1fr;gap:8px;align-items:end}
+.vs-m{text-align:center;padding-bottom:12px;font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace}
 .teams-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn-p{background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;cursor:pointer;transition:opacity .15s}
-.btn-p:hover{opacity:.85}
-.btn-s{background:none;color:var(--text2);border:1px solid var(--border2);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 16px;cursor:pointer}
-.btn-d{background:none;color:var(--red);border:1px solid rgba(200,0,30,.25);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;cursor:pointer;white-space:nowrap}
-.m-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;gap:8px}
+.btn-p{background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:12px 22px;cursor:pointer;transition:opacity .15s;min-height:46px;-webkit-appearance:none}
+.btn-p:active{opacity:.85}
+.btn-s{background:none;color:var(--text2);border:1px solid var(--border2);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:8px 16px;cursor:pointer;min-height:38px}
+.btn-d{background:none;color:var(--red);border:1px solid rgba(200,0,30,.25);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:6px 10px;cursor:pointer;white-space:nowrap;min-height:34px}
+.m-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;gap:8px}
 .m-item:last-child{border:none}
-.m-item span{color:var(--text2)}
-.po-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.series-block{background:#f6f8ff;border:1px solid var(--border);padding:14px;margin-bottom:14px}
+.m-item span{color:var(--text2);font-size:12px;line-height:1.4}
+.series-block{background:#f6f8ff;border:1px solid var(--border);padding:14px;margin-bottom:12px}
 .series-block-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--nba-blue);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.game-win-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.game-win-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px;min-width:52px}
+.game-win-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.game-win-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px;min-width:52px;flex-shrink:0}
 
-/* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;padding:12px 20px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;box-shadow:0 4px 20px rgba(29,66,138,.3)}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:16px;left:16px;max-width:320px;margin:0 auto;background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;padding:12px 18px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;box-shadow:0 4px 20px rgba(29,66,138,.3);text-align:center}
 .toast.show{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE OVERRIDES ── */
+@media (max-width:600px){
+  .header-inner{padding:0 14px;height:54px}
+  .logo-name{font-size:16px}
+  .logo-sub{display:none}
+  .nba-ball{width:32px;height:32px}
+  .admin-pill{font-size:9px;padding:6px 10px}
+  .nav-btn{font-size:12px;padding:10px 13px;letter-spacing:1.5px}
+  main{padding:14px 12px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+  .ph{margin-bottom:14px;padding-bottom:10px}
+  .ph h1{font-size:24px}
+  .ph-sub{font-size:9px;letter-spacing:1px}
+
+  /* Standings: hide PF PA +/- on tiny screens, keep rank team W L PCT */
+  .col-hide{display:none}
+  .standings-table thead th{padding:7px 8px;font-size:10px;letter-spacing:1px}
+  .standings-table tbody td{padding:9px 8px;font-size:12px}
+  .team-cell-name{font-size:13px}
+
+  /* Cards */
+  .sched-main{padding:10px 12px}
+  .sched-teams{font-size:13px;gap:6px}
+  .sched-time{font-size:10px;padding:3px 7px}
+  .res-main{padding:10px 12px}
+  .res-teams{font-size:13px;gap:6px}
+  .score-pill{font-size:12px;padding:4px 10px;letter-spacing:1.5px}
+  .res-date-strip{min-width:46px;font-size:9px;padding:0 8px}
+
+  /* Admin forms */
+  .f-g2{grid-template-columns:1fr}
+  .teams-g{grid-template-columns:1fr}
+  .f-gvs{grid-template-columns:1fr 28px 1fr;gap:6px}
+  .a-body{padding:14px 12px}
+  .btn-p{width:100%}
+  .game-win-row .btn-p{flex:1}
+
+  /* Bracket scroll hint */
+  .bracket-hint{display:block}
+}
+@media (min-width:601px){
+  .col-hide{display:table-cell}
+  .bracket-hint{display:none}
+  .standings-table tbody td{padding:10px 12px}
+}
+.bracket-hint{background:#eef3ff;border:1px solid #c4d0ec;color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;padding:6px 12px;margin-bottom:10px;text-align:center}
 </style>
 </head>
 <body>
@@ -209,8 +223,7 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
 <header>
   <div class="header-inner">
     <div class="logo">
-      <!-- NBA-style ball SVG -->
-      <svg class="nba-ball" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="nba-ball" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="20" cy="20" r="19" fill="#c8102e" stroke="#fff" stroke-width="1"/>
         <path d="M20 1 Q26 10 26 20 Q26 30 20 39" stroke="#fff" stroke-width="1.2" fill="none"/>
         <path d="M20 1 Q14 10 14 20 Q14 30 20 39" stroke="#fff" stroke-width="1.2" fill="none"/>
@@ -244,18 +257,23 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
   </div>
   <div class="standings-wrap">
     <div class="standings-hdr">
-      <span class="standings-hdr-title">BH 2v2 — Season Standings</span>
+      <span class="standings-hdr-title">BH 2v2 Standings</span>
       <span class="standings-hdr-sub">2026 Season</span>
     </div>
     <table class="standings-table">
       <thead><tr>
-        <th class="tl" style="width:44px">Rank</th>
+        <th class="tl" style="width:36px">#</th>
         <th class="tl">Team</th>
-        <th>W</th><th>L</th><th>PCT</th><th>PF</th><th>PA</th><th>+/-</th>
+        <th style="width:36px">W</th>
+        <th style="width:36px">L</th>
+        <th style="width:52px">PCT</th>
+        <th class="col-hide" style="width:40px">PF</th>
+        <th class="col-hide" style="width:40px">PA</th>
+        <th class="col-hide" style="width:44px">+/-</th>
       </tr></thead>
       <tbody id="s-body"></tbody>
     </table>
-    <div class="standings-footer">All 8 teams advance to playoffs · Seeded by win percentage · Point differential as tiebreaker</div>
+    <div class="standings-footer">All 8 teams advance · Seeded by win pct · Point diff tiebreaker</div>
   </div>
 </div>
 
@@ -274,8 +292,9 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
 <!-- BRACKET -->
 <div class="page" id="page-bracket">
   <div class="ph">
-    <div><h1>Playoffs</h1><div class="ph-sub">// Quarterfinals & Semis: Best of 3 · Finals: Best of 5</div></div>
+    <div><h1>Playoffs</h1><div class="ph-sub">// QF &amp; Semis: Best of 3 · Finals: Best of 5</div></div>
   </div>
+  <div class="bracket-hint">← Swipe to see full bracket →</div>
   <div class="bracket-outer"><div id="bracket-view"></div></div>
 </div>
 
@@ -299,8 +318,8 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
 
   <div class="a-panel" id="a-panel">
     <div class="a-topbar">
-      <div><h1 style="font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue)">Admin Panel</h1>
-      <div class="ph-sub" style="margin-top:4px">// League Management</div></div>
+      <div><h1 style="font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue)">Admin Panel</h1>
+      <div class="ph-sub" style="margin-top:3px">// League Management</div></div>
       <button class="btn-s" onclick="lockAdmin()">Lock</button>
     </div>
 
@@ -316,7 +335,7 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
       <div class="a-hdr"><span>Add Game to Schedule</span></div>
       <div class="a-body">
         <div class="f-row">
-          <label class="f-label">Day Group (e.g. Day 1, Day 2)</label>
+          <label class="f-label">Day Group (e.g. Day 1)</label>
           <input class="f-input" id="sg-day" placeholder="Day 1" style="max-width:160px">
         </div>
         <div class="f-gvs" style="margin-bottom:12px">
@@ -338,12 +357,12 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
         <div class="f-gvs" style="margin-bottom:12px">
           <div>
             <div class="f-row"><label class="f-label">Team 1</label><select class="f-select" id="rg-t1"></select></div>
-            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s1" min="0" max="99" placeholder="0"></div>
+            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s1" min="0" max="99" placeholder="0" inputmode="numeric"></div>
           </div>
           <div class="vs-m" style="padding-bottom:9px">VS</div>
           <div>
             <div class="f-row"><label class="f-label">Team 2</label><select class="f-select" id="rg-t2"></select></div>
-            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s2" min="0" max="99" placeholder="0"></div>
+            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s2" min="0" max="99" placeholder="0" inputmode="numeric"></div>
           </div>
         </div>
         <div class="f-row" style="margin-bottom:14px">
@@ -372,7 +391,7 @@ main{max-width:960px;margin:0 auto;padding:28px 20px}
     <div class="a-section">
       <div class="a-hdr red"><span>Danger Zone</span></div>
       <div class="a-body">
-        <button class="btn-d" style="font-size:13px;padding:9px 20px" onclick="resetAll()">Reset All Data</button>
+        <button class="btn-d" style="font-size:13px;padding:10px 20px" onclick="resetAll()">Reset All Data</button>
       </div>
     </div>
   </div>
@@ -399,6 +418,7 @@ function showTab(t){
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+t).classList.add('active');
   const nb=document.getElementById('nav-'+t);if(nb)nb.classList.add('active');
+  window.scrollTo(0,0);
   if(t==='standings')renderStandings();
   if(t==='schedule')renderSchedule();
   if(t==='results')renderResults();
@@ -442,13 +462,13 @@ function renderStandings(){
       <td class="w-td">${wv}</td>
       <td class="l-td">${lv}</td>
       <td class="pct-td">${pct}</td>
-      <td>${t.pf}</td><td>${t.pa}</td>
-      <td class="${dc}">${ds}</td>
+      <td class="col-hide">${t.pf}</td>
+      <td class="col-hide">${t.pa}</td>
+      <td class="col-hide ${dc}">${ds}</td>
     </tr>`;
   }).join('');
 }
 
-/* HELPERS */
 function fmtDate(d){
   if(!d)return'—';
   const dt=new Date(d+'T12:00:00');
@@ -460,7 +480,6 @@ function fmtTime(t){
   return(hr>12?hr-12:hr||12)+':'+m+(hr>=12?' PM':' AM');
 }
 
-/* SCHEDULE */
 function renderSchedule(){
   const sched=getSched().slice().sort((a,b)=>(a.dayLabel||'')>(b.dayLabel||'')?1:(a.dayLabel||'')<(b.dayLabel||'')?-1:(a.date||'')>(b.date||'')?1:-1);
   const el=document.getElementById('sched-list');
@@ -475,7 +494,6 @@ function renderSchedule(){
   }).join('');
 }
 
-/* RESULTS */
 function renderResults(){
   const res=getRes().slice().sort((a,b)=>b.date>a.date?1:-1);
   const el=document.getElementById('res-list');
@@ -486,8 +504,7 @@ function renderResults(){
   }).join('');
 }
 
-/* SERIES LOGIC */
-// po['series_KEY'] = array of team names who won each game e.g. ['TeamA','TeamB','TeamA']
+/* SERIES */
 function getSeriesWins(key,t1,t2){
   const games=(getPO()['series_'+key]||[]);
   return{w1:games.filter(g=>g===t1).length,w2:games.filter(g=>g===t2).length,total:games.length};
@@ -515,7 +532,6 @@ function removeLastSeriesGame(key){
 function renderBracket(){
   const seeds=calcStandings().map(t=>t.name);
   while(seeds.length<8)seeds.push('TBD');
-  const po=getPO();
 
   const qfM=[
     {key:'qf1',t1:seeds[0],t2:seeds[7],s1:1,s2:8,needed:2},
@@ -532,56 +548,51 @@ function renderBracket(){
   const finM={key:'final',t1:sfW[0]||'',t2:sfW[1]||'',needed:3};
   const champ=seriesWinner('final',finM.t1,finM.t2,3);
 
-  function bt(name,key,isT1,seed,winner,isFinal,needed){
+  function bt(name,key,seed,winner,isFinal){
     const tbd=!name||name==='TBD';
     if(tbd){
       return`<div class="b-team-row tbd">
         <div class="b-team-left">
           ${seed?`<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:12px;flex-shrink:0">${seed}</span>`:''}
-          <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;font-style:italic;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">TBD</span>
+          <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;font-style:italic;color:var(--text3)">TBD</span>
         </div>
       </div>`;
     }
-    const isWinner=winner&&name===winner;
-    const cls=isWinner?(isFinal?'winner-red':'winner'):'';
+    const isW=winner&&name===winner;
+    const cls=isW?(isFinal?'winner-red':'winner'):'';
     const allGames=(getPO()['series_'+key]||[]);
     const myWins=allGames.filter(g=>g===name).length;
     const showWins=myWins>0||!!winner;
-    const winColor=isWinner?'#fff':(isFinal?'var(--nba-red)':'var(--nba-blue)');
-    const seedSpan=seed?`<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:${isWinner?'rgba(255,255,255,0.5)':'var(--text3)'};min-width:12px;flex-shrink:0">${seed}</span>`:'';
+    const winColor=isW?'#fff':(isFinal?'var(--nba-red)':'var(--nba-blue)');
+    const seedSpan=seed?`<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:${isW?'rgba(255,255,255,0.5)':'var(--text3)'};min-width:12px;flex-shrink:0">${seed}</span>`:'';
     return`<div class="b-team-row ${cls}">
       <div class="b-team-left">
         ${seedSpan}
-        <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:${isWinner?'#fff':'var(--text)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span>
+        <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:${isW?'#fff':'var(--text)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span>
       </div>
       ${showWins?`<span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:${winColor};flex-shrink:0;min-width:16px;text-align:right">${myWins}</span>`:''}
     </div>`;
   }
-  function seriesLine(key,t1,t2,needed){
+  function sline(key,t1,t2,needed){
     if(!t1||!t2||t1==='TBD'||t2==='TBD')return`<div class="b-series-divider"></div>`;
     const{w1,w2}=getSeriesWins(key,t1,t2);
     const w=seriesWinner(key,t1,t2,needed);
-    const bo=needed*2-1;
-    if(w) return`<div class="b-series-divider"></div>`;
-    if(w1>0||w2>0) return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--nba-blue);font-weight:700;letter-spacing:.5px;padding:2px 0 4px">Series tied ${w1}-${w2}</div>`;
-    return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.5px;padding:2px 0 4px">Best of ${bo}</div>`;
+    if(w)return`<div class="b-series-divider"></div>`;
+    if(w1>0||w2>0)return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--nba-blue);font-weight:700;padding:2px 0 4px">Series tied ${w1}-${w2}</div>`;
+    return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);padding:2px 0 4px">Best of ${needed*2-1}</div>`;
   }
 
   const slotH=60,qfH=8*slotH;
+  const cv=[.75,2.25,4.75,6.25].map(v=>v*slotH);
+  const sfC1=qfH*.25,sfC2=qfH*.75,fCtr=qfH/2;
 
   let h=`<div class="bracket-grid">`;
 
   // QF
-  h+=`<div class="b-col"><div class="b-col-hdr">Quarterfinals</div><div class="b-col-sub">Best of 3</div>
-    <div class="b-body" style="height:${qfH}px">`;
-  qfM.forEach(m=>{
-    const w=qfW[qfM.indexOf(m)]||'';
-    h+=`<div class="b-matchup">${bt(m.t1,m.key,true,m.s1,w,false,m.needed)}${bt(m.t2,m.key,false,m.s2,w,false,m.needed)}${seriesLine(m.key,m.t1,m.t2,m.needed)}</div>`;
-  });
+  h+=`<div class="b-col"><div class="b-col-hdr">Quarterfinals</div><div class="b-col-sub">Best of 3</div><div class="b-body" style="height:${qfH}px">`;
+  qfM.forEach(m=>{const w=qfW[qfM.indexOf(m)]||'';h+=`<div class="b-matchup">${bt(m.t1,m.key,m.s1,w,false)}${bt(m.t2,m.key,m.s2,w,false)}${sline(m.key,m.t1,m.t2,m.needed)}</div>`;});
   h+=`</div></div>`;
 
-  // Conn QF→SF
-  const cv=[.75,2.25,4.75,6.25].map(v=>v*slotH);
   h+=`<div class="conn"><svg width="20" height="${qfH}" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,${cv[0]} H10 V${(cv[0]+cv[1])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
     <path d="M0,${cv[1]} H10 V${(cv[0]+cv[1])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
@@ -590,16 +601,10 @@ function renderBracket(){
   </svg></div>`;
 
   // SF
-  h+=`<div class="b-col"><div class="b-col-hdr">Semifinals</div><div class="b-col-sub">Best of 3</div>
-    <div class="b-body" style="height:${qfH}px">`;
-  sfM.forEach(m=>{
-    const w=sfW[sfM.indexOf(m)]||'';
-    h+=`<div class="b-matchup">${bt(m.t1,m.key,true,'',w,false,m.needed)}${bt(m.t2,m.key,false,'',w,false,m.needed)}${seriesLine(m.key,m.t1,m.t2,m.needed)}</div>`;
-  });
+  h+=`<div class="b-col"><div class="b-col-hdr">Semifinals</div><div class="b-col-sub">Best of 3</div><div class="b-body" style="height:${qfH}px">`;
+  sfM.forEach(m=>{const w=sfW[sfM.indexOf(m)]||'';h+=`<div class="b-matchup">${bt(m.t1,m.key,'',w,false)}${bt(m.t2,m.key,'',w,false)}${sline(m.key,m.t1,m.t2,m.needed)}</div>`;});
   h+=`</div></div>`;
 
-  // Conn SF→Finals
-  const sfC1=qfH*.25,sfC2=qfH*.75,fCtr=qfH/2;
   h+=`<div class="conn"><svg width="20" height="${qfH}" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,${sfC1} H10 V${fCtr} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
     <path d="M0,${sfC2} H10 V${fCtr} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
@@ -609,12 +614,12 @@ function renderBracket(){
   h+=`<div class="b-col"><div class="b-col-hdr finals">Finals</div><div class="b-col-sub finals">Best of 5</div>
     <div class="b-body finals" style="height:${qfH}px;justify-content:center">
       <div class="b-matchup" style="padding:16px 0">
-        ${bt(finM.t1,'final',true,'',champ,true,finM.needed)}${bt(finM.t2,'final',false,'',champ,true,finM.needed)}
-        ${seriesLine('final',finM.t1,finM.t2,finM.needed)}
+        ${bt(finM.t1,'final','',champ,true)}${bt(finM.t2,'final','',champ,true)}
+        ${sline('final',finM.t1,finM.t2,finM.needed)}
         <div style="margin:12px 8px 4px;background:${champ?'var(--nba-blue)':'#f0f2f8'};border:${champ?'2px solid var(--nba-blue)':'2px dashed var(--border2)'};padding:14px 12px;text-align:center">
-          <div style="font-size:24px;margin-bottom:6px">🏆</div>
+          <div style="font-size:22px;margin-bottom:5px">🏆</div>
           <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:${champ?'rgba(255,255,255,0.55)':'var(--text3)'};margin-bottom:4px">2026 Champion</div>
-          <div style="font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${champ?'#fff':'var(--text3)'};word-break:break-word;line-height:1.2">${champ||'—'}</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${champ?'#fff':'var(--text3)'};word-break:break-word;line-height:1.2">${champ||'—'}</div>
         </div>
       </div>
     </div>
@@ -624,53 +629,42 @@ function renderBracket(){
   document.getElementById('bracket-view').innerHTML=h;
 }
 
-/* ADMIN PLAYOFF PANEL */
+/* ADMIN */
 function renderPoAdmin(){
   const seeds=calcStandings().map(t=>t.name);
   while(seeds.length<8)seeds.push('TBD');
   const qfW=[
-    seriesWinner('qf1',seeds[0],seeds[7],2),
-    seriesWinner('qf2',seeds[3],seeds[4],2),
-    seriesWinner('qf3',seeds[1],seeds[6],2),
-    seriesWinner('qf4',seeds[2],seeds[5],2),
+    seriesWinner('qf1',seeds[0],seeds[7],2),seriesWinner('qf2',seeds[3],seeds[4],2),
+    seriesWinner('qf3',seeds[1],seeds[6],2),seriesWinner('qf4',seeds[2],seeds[5],2),
   ];
-  const sfW=[
-    seriesWinner('sf1',qfW[0]||'',qfW[1]||'',2),
-    seriesWinner('sf2',qfW[2]||'',qfW[3]||'',2),
-  ];
-
+  const sfW=[seriesWinner('sf1',qfW[0]||'',qfW[1]||'',2),seriesWinner('sf2',qfW[2]||'',qfW[3]||'',2)];
   const allSeries=[
-    {key:'qf1',label:'QF1 — Seed 1 vs 8',t1:seeds[0],t2:seeds[7],needed:2},
-    {key:'qf2',label:'QF2 — Seed 4 vs 5',t1:seeds[3],t2:seeds[4],needed:2},
-    {key:'qf3',label:'QF3 — Seed 2 vs 7',t1:seeds[1],t2:seeds[6],needed:2},
-    {key:'qf4',label:'QF4 — Seed 3 vs 6',t1:seeds[2],t2:seeds[5],needed:2},
+    {key:'qf1',label:'QF1 — 1 vs 8',t1:seeds[0],t2:seeds[7],needed:2},
+    {key:'qf2',label:'QF2 — 4 vs 5',t1:seeds[3],t2:seeds[4],needed:2},
+    {key:'qf3',label:'QF3 — 2 vs 7',t1:seeds[1],t2:seeds[6],needed:2},
+    {key:'qf4',label:'QF4 — 3 vs 6',t1:seeds[2],t2:seeds[5],needed:2},
     {key:'sf1',label:'SF1 — QF1W vs QF2W',t1:qfW[0]||'',t2:qfW[1]||'',needed:2},
     {key:'sf2',label:'SF2 — QF3W vs QF4W',t1:qfW[2]||'',t2:qfW[3]||'',needed:2},
     {key:'final',label:'Finals',t1:sfW[0]||'',t2:sfW[1]||'',needed:3},
   ];
-
-  const el=document.getElementById('po-admin-body');
-  el.innerHTML=allSeries.map(s=>{
+  document.getElementById('po-admin-body').innerHTML=allSeries.map(s=>{
     const{w1,w2,total}=getSeriesWins(s.key,s.t1,s.t2);
     const winner=seriesWinner(s.key,s.t1,s.t2,s.needed);
     const maxGames=s.needed*2-1;
     const canAdd=!winner&&total<maxGames&&s.t1&&s.t2&&s.t1!=='TBD'&&s.t2!=='TBD';
-    const t1Label=s.t1||'TBD',t2Label=s.t2||'TBD';
     return`<div class="series-block">
-      <div class="series-block-title">${s.label} &nbsp;<span style="font-weight:400;font-size:11px;color:var(--text3)">${winner?'✓ '+winner+' wins':'Series: '+w1+'-'+w2+(total>0?' ('+total+' played)':'')}</span></div>
-      ${canAdd?`
-      <div class="game-win-row">
+      <div class="series-block-title">${s.label} <span style="font-weight:400;font-size:11px;color:var(--text3)">${winner?'✓ '+winner+' wins':'Series: '+w1+'-'+w2+(total>0?' ('+total+' played)':'')}</span></div>
+      ${canAdd?`<div class="game-win-row">
         <span class="game-win-lbl">Game ${total+1}:</span>
-        <button class="btn-p" style="padding:6px 14px;font-size:12px" onclick="addSeriesGame('${s.key}','${s.t1}')">${t1Label} wins</button>
-        <button class="btn-p" style="padding:6px 14px;font-size:12px;background:var(--nba-red)" onclick="addSeriesGame('${s.key}','${s.t2}')">${t2Label} wins</button>
+        <button class="btn-p" style="padding:8px 14px;font-size:12px;flex:1" onclick="addSeriesGame('${s.key}','${s.t1}')">${s.t1||'TBD'} wins</button>
+        <button class="btn-p" style="padding:8px 14px;font-size:12px;flex:1;background:var(--nba-red)" onclick="addSeriesGame('${s.key}','${s.t2}')">${s.t2||'TBD'} wins</button>
       </div>`:''}
-      ${total>0?`<button class="btn-d" style="margin-top:4px" onclick="removeLastSeriesGame('${s.key}')">Undo last game</button>`:''}
-      ${!s.t1||s.t1==='TBD'?`<p style="font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace">Waiting for previous round...</p>`:''}
+      ${total>0?`<button class="btn-d" style="margin-top:6px" onclick="removeLastSeriesGame('${s.key}')">Undo last game</button>`:''}
+      ${!s.t1||s.t1==='TBD'?`<p style="font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-top:4px">Waiting for previous round...</p>`:''}
     </div>`;
   }).join('');
 }
 
-/* ADMIN PIN */
 function pi(el,n){
   if(el.value.length===1&&n<4)document.getElementById('p'+(n+1)).focus();
   if(n===4&&el.value.length===1)checkPin();
@@ -706,7 +700,6 @@ function lockAdmin(){
   [1,2,3,4].forEach(i=>{const el=document.getElementById('p'+i);el.value='';el.classList.remove('on')});
   showTab('standings');
 }
-
 function renderAdminPanel(){
   const teams=getTeams();
   document.getElementById('team-grid').innerHTML=teams.map((t,i)=>
@@ -718,11 +711,8 @@ function renderAdminPanel(){
   const today=new Date().toISOString().split('T')[0];
   document.getElementById('sg-date').value=today;
   document.getElementById('rg-date').value=today;
-  renderManageSched();
-  renderManageRes();
-  renderPoAdmin();
+  renderManageSched();renderManageRes();renderPoAdmin();
 }
-
 function saveTeams(){
   const names=Array.from(document.querySelectorAll('.team-inp')).map(i=>i.value.trim()).filter(Boolean);
   if(names.length!==8){toast('Need exactly 8 team names');return;}
