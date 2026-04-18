@@ -4,592 +4,713 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BH JV 2v2 League</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;700&family=Barlow+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #FFD700;
-  --court: #C8860A;
-  --dark: #0a0a0f;
-  --darker: #050508;
-  --panel: #111118;
-  --panel2: #16161f;
-  --border: #2a2a3a;
-  --text: #e8e8f0;
-  --muted: #666680;
-  --green: #00ff88;
-  --red: #ff4455;
-  --cyan: #00e5ff;
-  --tecmo-bg: #000014;
-  --tecmo-blue: #0000cc;
-  --tecmo-yellow: #ffff00;
-  --tecmo-green: #00cc00;
-  --tecmo-cyan: #00cccc;
-  --tecmo-white: #ffffff;
+:root{
+  --nba-blue:#1d428a;
+  --nba-red:#c8102e;
+  --nba-silver:#bfc0bf;
+  --bg:#f2f3f5;
+  --white:#fff;
+  --panel:#fff;
+  --border:#e2e4ea;
+  --border2:#c8cad4;
+  --text:#0d0d14;
+  --text2:#3a3a50;
+  --text3:#8888a0;
+  --green:#0d6e3c;
+  --red:#b8001a;
+  --stripe:#f7f8fc;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Barlow Condensed', sans-serif; background: var(--darker); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-.site-header { background: var(--dark); border-bottom: 3px solid var(--gold); padding: 0 24px; display: flex; align-items: stretch; justify-content: space-between; }
-.header-brand { display: flex; align-items: center; gap: 16px; padding: 16px 0; }
-.basketball-icon { width: 48px; height: 48px; background: var(--court); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; border: 2px solid var(--gold); flex-shrink: 0; }
-.brand-main { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--gold); letter-spacing: 3px; line-height: 1; }
-.brand-sub { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
-.header-right { display: flex; align-items: center; gap: 12px; }
-.admin-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 6px 12px; cursor: pointer; border-radius: 2px; transition: all .2s; text-transform: uppercase; }
-.admin-btn:hover { border-color: var(--gold); color: var(--gold); }
-.admin-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(255,215,0,.08); }
+/* HEADER */
+header{background:var(--nba-blue);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:62px}
+.logo{display:flex;align-items:center;gap:14px}
+.nba-ball{width:40px;height:40px;flex-shrink:0}
+.logo-text{}
+.logo-name{font-family:'Oswald',sans-serif;font-size:21px;font-weight:700;color:#fff;letter-spacing:1px;line-height:1;text-transform:uppercase}
+.logo-sub{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;font-family:'IBM Plex Mono',monospace}
+.admin-pill{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:all .2s}
+.admin-pill:hover,.admin-pill.active{border-color:rgba(255,255,255,0.7);color:#fff;background:rgba(255,255,255,0.08)}
 
-.site-nav { background: var(--dark); border-bottom: 1px solid var(--border); display: flex; padding: 0 24px; overflow-x: auto; }
-.nav-tab { background: none; border: none; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
-.nav-tab:hover { color: var(--text); }
-.nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+/* NAV */
+.site-nav{background:linear-gradient(to bottom,#1a3d80,#162f66);border-top:1px solid rgba(255,255,255,0.08);display:flex;padding:0 20px;overflow-x:auto}
+.site-nav::-webkit-scrollbar{display:none}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:11px 18px;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{color:rgba(255,255,255,0.85)}
+.nav-btn.active{color:#fff;border-bottom-color:var(--nba-red)}
+.red-bar{height:3px;background:var(--nba-red)}
 
-.main { padding: 24px; max-width: 1000px; margin: 0 auto; }
-.page-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; color: var(--gold); margin-bottom: 4px; }
-.page-sub { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-bottom: 24px; }
+/* MAIN */
+main{max-width:960px;margin:0 auto;padding:28px 20px}
+.page{display:none}.page.active{display:block}
 
-/* TECMO */
-.tecmo-container { background: var(--tecmo-bg); border: 4px solid #444; overflow: hidden; font-family: 'IBM Plex Mono', monospace; }
-.tecmo-header-bar { background: var(--tecmo-blue); padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; }
-.tecmo-header-bar span { color: var(--tecmo-yellow); font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-.tecmo-table { width: 100%; border-collapse: collapse; }
-.tecmo-table th { background: #111133; color: var(--tecmo-yellow); font-size: 11px; font-weight: 700; padding: 6px 10px; text-align: center; border: 1px solid #333355; letter-spacing: 2px; text-transform: uppercase; }
-.tecmo-table th.tleft { text-align: left; }
-.tecmo-table td { font-size: 12px; padding: 7px 10px; border: 1px solid #222244; text-align: center; color: var(--tecmo-white); }
-.tecmo-table td.tleft { text-align: left; }
-.tecmo-table tbody tr:nth-child(odd) td { background: #0a0a1e; }
-.tecmo-table tbody tr:nth-child(even) td { background: #050510; }
-.tecmo-table tbody tr:hover td { background: #0d0d28; }
-.rank-cell { color: var(--muted); font-size: 10px; width: 24px; }
-.pct-cell { color: var(--tecmo-cyan); }
-.diff-pos { color: var(--tecmo-green); }
-.diff-neg { color: #ff4444; }
-.team-name-cell { color: var(--tecmo-white); font-weight: 700; letter-spacing: 1px; }
-.wins-cell { color: var(--tecmo-green); }
-.loss-cell { color: #ff6666; }
-.playoffs-note { background: #000014; border-top: 1px solid #333; padding: 6px 12px; font-size: 10px; color: var(--tecmo-cyan); letter-spacing: 2px; font-family: 'IBM Plex Mono', monospace; }
+/* PAGE HEADER */
+.ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid var(--nba-blue)}
+.ph h1{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);line-height:1}
+.ph-sub{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;font-family:'IBM Plex Mono',monospace}
+.ph-badge{background:var(--nba-red);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;flex-shrink:0}
 
-/* GAMES */
-.game-row { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 12px 16px; margin-bottom: 8px; display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 12px; }
-.game-date-col { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-.game-teams-col { font-size: 15px; font-weight: 600; letter-spacing: 1px; }
-.game-vs { color: var(--muted); font-weight: 400; margin: 0 8px; font-size: 12px; }
-.game-score-badge { background: var(--gold); color: #000; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 700; padding: 5px 14px; border-radius: 2px; letter-spacing: 2px; white-space: nowrap; }
-.game-time-badge { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--cyan); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
-.winner-highlight { color: var(--gold); font-weight: 700; }
-.empty-state { background: var(--panel); border: 1px dashed var(--border); border-radius: 4px; padding: 32px; text-align: center; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; }
+/* NBA STANDINGS */
+.standings-wrap{background:var(--panel);border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.07)}
+.standings-hdr{background:var(--nba-blue);padding:11px 18px;display:flex;align-items:center;justify-content:space-between}
+.standings-hdr-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#fff}
+.standings-hdr-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px}
+.standings-table{width:100%;border-collapse:collapse}
+.standings-table thead th{background:#eef0f7;color:var(--text3);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;text-align:center;border-bottom:2px solid var(--border);border-right:1px solid var(--border)}
+.standings-table thead th.tl{text-align:left}
+.standings-table thead th:last-child{border-right:none}
+.standings-table tbody td{padding:11px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:center;font-size:14px;color:var(--text2);vertical-align:middle}
+.standings-table tbody td:last-child{border-right:none}
+.standings-table tbody td.tl{text-align:left}
+.standings-table tbody tr:nth-child(even) td{background:var(--stripe)}
+.standings-table tbody tr:hover td{background:#edf1ff}
+.standings-table tbody tr:last-child td{border-bottom:none}
+.rank-wrap{display:flex;align-items:center;justify-content:center}
+.rank-num{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;color:var(--text3)}
+.rank-1 .rank-num{background:var(--nba-blue);color:#fff}
+.rank-2 .rank-num{background:#1a3a7a;color:#fff}
+.rank-3 .rank-num{background:#264d8e;color:#fff}
+.rank-4 .rank-num{background:#3260a2;color:#fff}
+.team-cell-name{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text)}
+.w-td{color:var(--green);font-family:'Oswald',sans-serif;font-size:15px;font-weight:600}
+.l-td{color:var(--red);font-family:'Oswald',sans-serif;font-size:15px;font-weight:600}
+.pct-td{color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500}
+.pos-td{color:var(--green);font-weight:600}
+.neg-td{color:var(--red);font-weight:600}
+.standings-footer{background:#eef0f7;padding:8px 18px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid var(--border)}
+
+/* SCHEDULE */
+.day-group{margin-bottom:30px}
+.day-hdr{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.day-chip{background:var(--nba-blue);color:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;flex-shrink:0}
+.day-chip-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.5px}
+.day-rule{flex:1;height:2px;background:var(--nba-blue);opacity:.12}
+.sched-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;transition:box-shadow .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.sched-card:hover{box-shadow:0 3px 12px rgba(29,66,138,0.12)}
+.sched-num{background:var(--nba-blue);color:rgba(255,255,255,0.6);font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;padding:0 12px;display:flex;align-items:center;justify-content:center;min-width:42px;letter-spacing:1px}
+.sched-main{flex:1;padding:13px 18px;display:flex;align-items:center;gap:12px}
+.sched-teams{flex:1;font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px;color:var(--text)}
+.sched-vs{font-size:11px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace;letter-spacing:1px}
+.sched-time{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--nba-blue);background:#eef3ff;border:1px solid #c4d0ec;padding:4px 10px;flex-shrink:0}
+
+/* RESULTS */
+.res-card{background:var(--panel);border:1px solid var(--border);display:flex;align-items:stretch;margin-bottom:6px;overflow:hidden;transition:box-shadow .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.res-card:hover{box-shadow:0 3px 12px rgba(29,66,138,0.1)}
+.res-date-strip{background:#eef0f7;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0 12px;display:flex;align-items:center;justify-content:center;min-width:62px;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid var(--border);text-align:center;line-height:1.4}
+.res-main{flex:1;padding:13px 18px;display:flex;align-items:center;gap:12px}
+.res-teams{flex:1;font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.res-vs{font-size:11px;color:var(--text3);font-weight:400;font-family:'IBM Plex Mono',monospace}
+.win-nm{color:var(--nba-blue)}
+.loss-nm{color:var(--text3);font-weight:400}
+.score-pill{background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;padding:5px 14px;letter-spacing:2px;white-space:nowrap}
 
 /* BRACKET */
-.bracket-outer { overflow-x: auto; padding-bottom: 16px; }
-.bracket-wrap { display: flex; gap: 0; min-width: 820px; }
-.b-round { display: flex; flex-direction: column; min-width: 160px; }
-.b-round-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; text-align: center; padding: 0 8px 10px; border-bottom: 1px solid var(--border); margin-bottom: 0; }
-.b-connector { width: 32px; display: flex; flex-direction: column; }
-.b-matchup { display: flex; flex-direction: column; justify-content: center; flex: 1; }
-.b-team { background: var(--panel); border: 1px solid var(--border); border-radius: 2px; padding: 7px 10px; margin: 2px 6px; font-size: 12px; font-weight: 600; letter-spacing: 1px; display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 148px; }
-.b-team.winner { background: rgba(255,215,0,.15); border-color: var(--gold); color: var(--gold); }
-.b-team.tbd { color: var(--muted); font-style: italic; font-weight: 400; border-style: dashed; background: var(--darker); }
-.b-seed { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); min-width: 12px; }
-.b-team.winner .b-seed { color: #a88a00; }
-.champ-box { background: rgba(255,215,0,.1); border: 2px solid var(--gold); border-radius: 6px; padding: 20px 16px; text-align: center; min-width: 140px; }
-.champ-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
-.champ-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--gold); letter-spacing: 3px; word-break: break-word; }
+.bracket-outer{overflow-x:auto;padding-bottom:16px}
+.bracket-grid{display:flex;align-items:flex-start;min-width:940px}
+.b-col{display:flex;flex-direction:column;min-width:190px}
+.b-col-hdr{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:#fff;padding:9px 8px;background:var(--nba-blue)}
+.b-col-hdr.finals{background:var(--nba-red)}
+.b-col-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--text3);padding:5px 8px;background:#eef0f7;border-bottom:2px solid var(--border)}
+.b-col-sub.finals{background:#fff3f4;border-bottom-color:var(--nba-red)}
+.b-body{display:flex;flex-direction:column;justify-content:space-around;background:var(--panel);border-left:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.b-body.finals{border-left:2px solid var(--nba-red);border-right:2px solid var(--nba-red);border-bottom:2px solid var(--nba-red)}
+.b-matchup{display:flex;flex-direction:column;padding:4px 0}
+.b-team{display:flex;align-items:center;gap:8px;padding:8px 10px;margin:2px 8px;border:1px solid var(--border);background:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:174px;transition:all .15s}
+.b-team.winner{background:var(--nba-blue);color:#fff;border-color:var(--nba-blue)}
+.b-team.winner-red{background:var(--nba-red);color:#fff;border-color:var(--nba-red)}
+.b-team.tbd{color:var(--text3);font-weight:400;font-style:italic;background:#fafbff;border-style:dashed}
+.b-seed{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:12px;flex-shrink:0}
+.b-team.winner .b-seed,.b-team.winner-red .b-seed{color:rgba(255,255,255,0.5)}
+.b-series-row{display:flex;align-items:center;justify-content:space-between;padding:4px 10px 6px;gap:6px}
+.b-series-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.b-series-label.live{color:var(--nba-blue);font-weight:700}
+.b-series-label.won{color:var(--nba-red);font-weight:700}
+.b-dots{display:flex;gap:3px;align-items:center}
+.b-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--border2);background:#fff;flex-shrink:0}
+.b-dot.filled{background:var(--nba-blue);border-color:var(--nba-blue)}
+.b-dot.filled-red{background:var(--nba-red);border-color:var(--nba-red)}
+.b-team-row{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:8px 10px;margin:2px 8px;border:1px solid var(--border);background:#fff;transition:all .15s;min-height:38px}
+.b-team-row.winner{background:var(--nba-blue);border-color:var(--nba-blue)}
+.b-team-row.winner-red{background:var(--nba-red);border-color:var(--nba-red)}
+.b-team-row.tbd{background:#fafbff;border-style:dashed}
+.b-team-left{display:flex;align-items:center;gap:6px;overflow:hidden;flex:1;min-width:0}
+.b-team-wins{display:flex;gap:3px;flex-shrink:0}
+.b-win-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.4);background:transparent;flex-shrink:0}
+.b-win-dot.scored{background:#fff;border-color:#fff}
+.b-win-dot.scored-empty{background:transparent;border-color:rgba(255,255,255,0.35)}
+.b-team-row:not(.winner):not(.winner-red) .b-win-dot{border-color:var(--border2);background:transparent}
+.b-team-row:not(.winner):not(.winner-red) .b-win-dot.scored{background:var(--nba-blue);border-color:var(--nba-blue)}
+.b-series-divider{height:1px;background:var(--border);margin:0 8px}
+.conn{flex-shrink:0;margin-top:37px}
+.champ-col{display:flex;flex-direction:column;min-width:172px}
+.champ-body{flex:1;display:flex;align-items:center;justify-content:center;background:var(--panel);border:2px solid var(--nba-red);border-top:none;padding:24px 12px}
+.champ-box{text-align:center}
+.champ-trophy{font-size:36px;margin-bottom:8px}
+.champ-lbl{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.champ-name{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--nba-blue);letter-spacing:1px;text-transform:uppercase;word-break:break-word;line-height:1.2}
 
-/* ADMIN */
-.admin-locked { display: flex; align-items: center; justify-content: center; min-height: 300px; }
-.lock-card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 32px; width: 100%; max-width: 320px; text-align: center; }
-.lock-icon { font-size: 36px; margin-bottom: 16px; }
-.lock-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--gold); margin-bottom: 4px; }
-.lock-sub { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; margin-bottom: 24px; }
-.pin-input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
-.pin-digit { width: 52px; height: 60px; background: var(--darker); border: 1px solid var(--border); border-radius: 4px; color: var(--gold); font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 700; text-align: center; outline: none; transition: border-color .15s; }
-.pin-digit:focus { border-color: var(--gold); }
-.pin-digit.filled { border-color: var(--gold); }
-.btn-unlock { width: 100%; background: var(--gold); color: #000; border: none; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 12px; border-radius: 4px; cursor: pointer; }
-.pin-error { color: var(--red); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px; margin-top: 10px; height: 16px; }
+/* EMPTY */
+.empty{background:var(--panel);border:1px dashed var(--border2);padding:44px;text-align:center;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px}
 
-.admin-section { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin-bottom: 16px; }
-.admin-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--gold); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.form-label { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-.form-input, .form-select { background: var(--darker); border: 1px solid var(--border); color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-size: 15px; padding: 8px 12px; border-radius: 4px; width: 100%; outline: none; transition: border-color .15s; }
-.form-input:focus, .form-select:focus { border-color: var(--gold); }
-.form-select option { background: var(--darker); }
-.form-row { margin-bottom: 12px; }
-.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.form-grid-vs { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 8px; align-items: end; }
-.vs-mid { text-align: center; padding-bottom: 9px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
-.btn-primary { background: var(--gold); color: #000; border: none; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 9px 22px; border-radius: 4px; cursor: pointer; }
-.btn-primary:hover { opacity: .85; }
-.btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 3px 9px; border-radius: 3px; cursor: pointer; white-space: nowrap; }
-.btn-secondary { background: none; color: var(--muted); border: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 4px; cursor: pointer; }
-.teams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.manage-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; gap: 8px; }
-.manage-item:last-child { border-bottom: none; }
-.toast { position: fixed; bottom: 24px; right: 24px; background: var(--panel); border: 1px solid var(--gold); color: var(--gold); font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px; padding: 10px 20px; border-radius: 4px; z-index: 999; opacity: 0; transform: translateY(10px); transition: all .3s; pointer-events: none; }
-.toast.show { opacity: 1; transform: translateY(0); }
-.tab-page { display: none; }
-.tab-page.active { display: block; }
-.admin-panel-wrap { display: none; }
-.playoff-admin-box { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-top: 20px; }
-.playoff-admin-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
-.playoff-selects { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+/* ADMIN LOCK */
+.lock-wrap{display:flex;align-items:center;justify-content:center;min-height:340px}
+.lock-card{background:var(--panel);border:1px solid var(--border);box-shadow:0 4px 28px rgba(29,66,138,0.12);padding:40px 36px;max-width:320px;width:100%;text-align:center}
+.lock-icon-wrap{width:56px;height:56px;background:var(--nba-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px}
+.lock-title{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue);margin-bottom:4px}
+.lock-sub{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;margin-bottom:26px}
+.pin-row{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+.pin-d{width:54px;height:60px;background:#f2f4fc;border:2px solid var(--border2);color:var(--nba-blue);font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;text-align:center;outline:none;transition:border-color .15s}
+.pin-d:focus,.pin-d.on{border-color:var(--nba-blue);background:#eaf0ff}
+.btn-unlock{width:100%;background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px;cursor:pointer;transition:opacity .15s}
+.btn-unlock:hover{opacity:.88}
+.pin-err{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:10px;height:16px;letter-spacing:1px}
+
+/* ADMIN PANEL */
+.a-panel{display:none}
+.a-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.a-section{background:var(--panel);border:1px solid var(--border);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.a-hdr{background:var(--nba-blue);padding:10px 18px}
+.a-hdr.red{background:var(--nba-red)}
+.a-hdr span{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff}
+.a-body{padding:20px 18px}
+.f-label{display:block;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;font-family:'IBM Plex Mono',monospace}
+.f-input,.f-select{background:#f8f9fd;border:1px solid var(--border2);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:9px 12px;width:100%;outline:none;transition:border-color .15s}
+.f-input:focus,.f-select:focus{border-color:var(--nba-blue);background:#fff}
+.f-select option{background:#fff}
+.f-row{margin-bottom:12px}
+.f-g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f-gvs{display:grid;grid-template-columns:1fr 36px 1fr;gap:8px;align-items:end}
+.vs-m{text-align:center;padding-bottom:10px;font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace}
+.teams-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn-p{background:var(--nba-blue);color:#fff;border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;cursor:pointer;transition:opacity .15s}
+.btn-p:hover{opacity:.85}
+.btn-s{background:none;color:var(--text2);border:1px solid var(--border2);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 16px;cursor:pointer}
+.btn-d{background:none;color:var(--red);border:1px solid rgba(200,0,30,.25);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+.m-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;gap:8px}
+.m-item:last-child{border:none}
+.m-item span{color:var(--text2)}
+.po-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.series-block{background:#f6f8ff;border:1px solid var(--border);padding:14px;margin-bottom:14px}
+.series-block-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--nba-blue);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.game-win-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.game-win-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px;min-width:52px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--nba-blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;padding:12px 20px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;box-shadow:0 4px 20px rgba(29,66,138,.3)}
+.toast.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<div class="site-header">
-  <div class="header-brand">
-    <div class="basketball-icon">🏀</div>
-    <div class="brand-text">
-      <div class="brand-main">BH JV 2v2 League</div>
-      <div class="brand-sub">Byram Hills Basketball · Before Practice</div>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <!-- NBA-style ball SVG -->
+      <svg class="nba-ball" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="#c8102e" stroke="#fff" stroke-width="1"/>
+        <path d="M20 1 Q26 10 26 20 Q26 30 20 39" stroke="#fff" stroke-width="1.2" fill="none"/>
+        <path d="M20 1 Q14 10 14 20 Q14 30 20 39" stroke="#fff" stroke-width="1.2" fill="none"/>
+        <path d="M1 20 Q10 14 20 14 Q30 14 39 20" stroke="#fff" stroke-width="1.2" fill="none"/>
+        <path d="M1 20 Q10 26 20 26 Q30 26 39 20" stroke="#fff" stroke-width="1.2" fill="none"/>
+      </svg>
+      <div class="logo-text">
+        <div class="logo-name">BH JV 2v2 League</div>
+        <div class="logo-sub">Byram Hills · Before Practice</div>
+      </div>
     </div>
+    <button class="admin-pill" id="admin-pill" onclick="goAdmin()">⚙ Admin</button>
   </div>
-  <div class="header-right">
-    <button class="admin-btn" id="admin-toggle-btn" onclick="goAdmin()">⚙ Admin</button>
+  <div class="site-nav">
+    <button class="nav-btn active" id="nav-standings" onclick="showTab('standings')">Standings</button>
+    <button class="nav-btn" id="nav-schedule" onclick="showTab('schedule')">Schedule</button>
+    <button class="nav-btn" id="nav-results" onclick="showTab('results')">Results</button>
+    <button class="nav-btn" id="nav-bracket" onclick="showTab('bracket')">Playoffs</button>
+    <button class="nav-btn" id="nav-admin" onclick="showTab('admin')" style="display:none">Admin</button>
+  </div>
+</header>
+<div class="red-bar"></div>
+
+<main>
+
+<!-- STANDINGS -->
+<div class="page active" id="page-standings">
+  <div class="ph">
+    <div><h1>Standings</h1><div class="ph-sub">// 2026 Regular Season</div></div>
+    <div class="ph-badge">All 8 Make Playoffs</div>
+  </div>
+  <div class="standings-wrap">
+    <div class="standings-hdr">
+      <span class="standings-hdr-title">BH 2v2 — Season Standings</span>
+      <span class="standings-hdr-sub">2026 Season</span>
+    </div>
+    <table class="standings-table">
+      <thead><tr>
+        <th class="tl" style="width:44px">Rank</th>
+        <th class="tl">Team</th>
+        <th>W</th><th>L</th><th>PCT</th><th>PF</th><th>PA</th><th>+/-</th>
+      </tr></thead>
+      <tbody id="s-body"></tbody>
+    </table>
+    <div class="standings-footer">All 8 teams advance to playoffs · Seeded by win percentage · Point differential as tiebreaker</div>
   </div>
 </div>
 
-<div class="site-nav">
-  <button class="nav-tab active" id="nav-standings" onclick="showTab('standings')">Standings</button>
-  <button class="nav-tab" id="nav-schedule" onclick="showTab('schedule')">Schedule</button>
-  <button class="nav-tab" id="nav-results" onclick="showTab('results')">Results</button>
-  <button class="nav-tab" id="nav-bracket" onclick="showTab('bracket')">Playoffs</button>
-  <button class="nav-tab" id="nav-admin" onclick="showTab('admin')" style="display:none">Admin Panel</button>
+<!-- SCHEDULE -->
+<div class="page" id="page-schedule">
+  <div class="ph"><div><h1>Schedule</h1><div class="ph-sub">// Upcoming games by day</div></div></div>
+  <div id="sched-list"></div>
 </div>
 
-<div class="main">
+<!-- RESULTS -->
+<div class="page" id="page-results">
+  <div class="ph"><div><h1>Results</h1><div class="ph-sub">// Completed games</div></div></div>
+  <div id="res-list"></div>
+</div>
 
-  <!-- STANDINGS -->
-  <div id="page-standings" class="tab-page active">
-    <div class="page-title">Standings</div>
-    <div class="page-sub">// SEASON 2025 — ALL 8 TEAMS MAKE PLAYOFFS</div>
-    <div class="tecmo-container">
-      <div class="tecmo-header-bar">
-        <span>BH 2v2 — Team Standings</span>
-        <span style="font-size:10px;color:#00cccc;letter-spacing:2px">2025 SEASON</span>
+<!-- BRACKET -->
+<div class="page" id="page-bracket">
+  <div class="ph">
+    <div><h1>Playoffs</h1><div class="ph-sub">// Quarterfinals & Semis: Best of 3 · Finals: Best of 5</div></div>
+  </div>
+  <div class="bracket-outer"><div id="bracket-view"></div></div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+  <div class="lock-wrap" id="lock-screen">
+    <div class="lock-card">
+      <div class="lock-icon-wrap">🔒</div>
+      <div class="lock-title">Admin</div>
+      <div class="lock-sub">Enter 4-digit code</div>
+      <div class="pin-row">
+        <input class="pin-d" id="p1" type="password" maxlength="1" inputmode="numeric" oninput="pi(this,1)" onkeydown="pk(event,1)">
+        <input class="pin-d" id="p2" type="password" maxlength="1" inputmode="numeric" oninput="pi(this,2)" onkeydown="pk(event,2)">
+        <input class="pin-d" id="p3" type="password" maxlength="1" inputmode="numeric" oninput="pi(this,3)" onkeydown="pk(event,3)">
+        <input class="pin-d" id="p4" type="password" maxlength="1" inputmode="numeric" oninput="pi(this,4)" onkeydown="pk(event,4)">
       </div>
-      <table class="tecmo-table">
-        <thead>
-          <tr>
-            <th class="tleft" style="width:28px">#</th>
-            <th class="tleft">Team</th>
-            <th>W</th><th>L</th><th>PCT</th><th>PF</th><th>PA</th><th>DIFF</th>
-          </tr>
-        </thead>
-        <tbody id="standings-body"></tbody>
-      </table>
-      <div class="playoffs-note">▶ ALL 8 TEAMS ADVANCE TO PLAYOFFS &nbsp;|&nbsp; SEEDED BY RECORD</div>
+      <button class="btn-unlock" onclick="checkPin()">Unlock</button>
+      <div class="pin-err" id="pin-err"></div>
     </div>
   </div>
 
-  <!-- SCHEDULE -->
-  <div id="page-schedule" class="tab-page">
-    <div class="page-title">Schedule</div>
-    <div class="page-sub">// UPCOMING GAMES</div>
-    <div id="schedule-list"></div>
-  </div>
-
-  <!-- RESULTS -->
-  <div id="page-results" class="tab-page">
-    <div class="page-title">Results</div>
-    <div class="page-sub">// COMPLETED GAMES</div>
-    <div id="results-list"></div>
-  </div>
-
-  <!-- BRACKET -->
-  <div id="page-bracket" class="tab-page">
-    <div class="page-title">Playoffs</div>
-    <div class="page-sub">// 8-TEAM SINGLE ELIMINATION — SEEDED BY STANDINGS</div>
-    <div class="bracket-outer">
-      <div id="bracket-view"></div>
+  <div class="a-panel" id="a-panel">
+    <div class="a-topbar">
+      <div><h1 style="font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--nba-blue)">Admin Panel</h1>
+      <div class="ph-sub" style="margin-top:4px">// League Management</div></div>
+      <button class="btn-s" onclick="lockAdmin()">Lock</button>
     </div>
-  </div>
 
-  <!-- ADMIN -->
-  <div id="page-admin" class="tab-page">
-    <div class="admin-locked" id="admin-locked-screen">
-      <div class="lock-card">
-        <div class="lock-icon">🔒</div>
-        <div class="lock-title">Admin Access</div>
-        <div class="lock-sub">// ENTER 4-DIGIT CODE</div>
-        <div class="pin-input-row">
-          <input class="pin-digit" id="pin1" type="password" maxlength="1" inputmode="numeric" oninput="pinInput(this,1)" onkeydown="pinKey(event,1)">
-          <input class="pin-digit" id="pin2" type="password" maxlength="1" inputmode="numeric" oninput="pinInput(this,2)" onkeydown="pinKey(event,2)">
-          <input class="pin-digit" id="pin3" type="password" maxlength="1" inputmode="numeric" oninput="pinInput(this,3)" onkeydown="pinKey(event,3)">
-          <input class="pin-digit" id="pin4" type="password" maxlength="1" inputmode="numeric" oninput="pinInput(this,4)" onkeydown="pinKey(event,4)">
-        </div>
-        <button class="btn-unlock" onclick="checkPin()">Unlock</button>
-        <div class="pin-error" id="pin-error"></div>
+    <div class="a-section">
+      <div class="a-hdr"><span>Team Names</span></div>
+      <div class="a-body">
+        <div class="teams-g" id="team-grid"></div>
+        <div style="margin-top:14px"><button class="btn-p" onclick="saveTeams()">Save Names</button></div>
       </div>
     </div>
 
-    <div class="admin-panel-wrap" id="admin-panel">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <div>
-          <div class="page-title" style="margin-bottom:0">Admin Panel</div>
-          <div class="page-sub" style="margin-bottom:0">// LEAGUE MANAGEMENT</div>
+    <div class="a-section">
+      <div class="a-hdr"><span>Add Game to Schedule</span></div>
+      <div class="a-body">
+        <div class="f-row">
+          <label class="f-label">Day Group (e.g. Day 1, Day 2)</label>
+          <input class="f-input" id="sg-day" placeholder="Day 1" style="max-width:160px">
         </div>
-        <button class="btn-secondary" onclick="lockAdmin()">Lock</button>
-      </div>
-
-      <div class="admin-section">
-        <div class="admin-section-title">Team Names</div>
-        <div class="teams-grid" id="team-name-grid"></div>
-        <div style="margin-top:12px"><button class="btn-primary" onclick="saveTeamNames()">Save Names</button></div>
-      </div>
-
-      <div class="admin-section">
-        <div class="admin-section-title">Add Scheduled Game</div>
-        <div class="form-grid-vs" style="margin-bottom:12px">
-          <div class="form-row"><label class="form-label">Team 1</label><select class="form-select" id="sg-t1"></select></div>
-          <div class="vs-mid">VS</div>
-          <div class="form-row"><label class="form-label">Team 2</label><select class="form-select" id="sg-t2"></select></div>
+        <div class="f-gvs" style="margin-bottom:12px">
+          <div class="f-row"><label class="f-label">Team 1</label><select class="f-select" id="sg-t1"></select></div>
+          <div class="vs-m">VS</div>
+          <div class="f-row"><label class="f-label">Team 2</label><select class="f-select" id="sg-t2"></select></div>
         </div>
-        <div class="form-grid-2" style="margin-bottom:14px">
-          <div class="form-row"><label class="form-label">Date</label><input class="form-input" type="date" id="sg-date"></div>
-          <div class="form-row"><label class="form-label">Time</label><input class="form-input" type="time" id="sg-time"></div>
+        <div class="f-g2" style="margin-bottom:14px">
+          <div class="f-row"><label class="f-label">Date</label><input class="f-input" type="date" id="sg-date"></div>
+          <div class="f-row"><label class="f-label">Time</label><input class="f-input" type="time" id="sg-time"></div>
         </div>
-        <button class="btn-primary" onclick="addScheduledGame()">Add Game</button>
+        <button class="btn-p" onclick="addGame()">Add Game</button>
       </div>
+    </div>
 
-      <div class="admin-section">
-        <div class="admin-section-title">Log Game Result</div>
-        <div class="form-grid-vs" style="margin-bottom:12px">
+    <div class="a-section">
+      <div class="a-hdr"><span>Log Game Result</span></div>
+      <div class="a-body">
+        <div class="f-gvs" style="margin-bottom:12px">
           <div>
-            <div class="form-row"><label class="form-label">Team 1</label><select class="form-select" id="rg-t1"></select></div>
-            <div class="form-row"><label class="form-label">Score</label><input class="form-input" type="number" id="rg-s1" min="0" max="99" placeholder="0"></div>
+            <div class="f-row"><label class="f-label">Team 1</label><select class="f-select" id="rg-t1"></select></div>
+            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s1" min="0" max="99" placeholder="0"></div>
           </div>
-          <div class="vs-mid" style="padding-bottom:9px">VS</div>
+          <div class="vs-m" style="padding-bottom:9px">VS</div>
           <div>
-            <div class="form-row"><label class="form-label">Team 2</label><select class="form-select" id="rg-t2"></select></div>
-            <div class="form-row"><label class="form-label">Score</label><input class="form-input" type="number" id="rg-s2" min="0" max="99" placeholder="0"></div>
+            <div class="f-row"><label class="f-label">Team 2</label><select class="f-select" id="rg-t2"></select></div>
+            <div class="f-row"><label class="f-label">Score</label><input class="f-input" type="number" id="rg-s2" min="0" max="99" placeholder="0"></div>
           </div>
         </div>
-        <div class="form-row" style="margin-bottom:14px">
-          <label class="form-label">Date Played</label>
-          <input class="form-input" type="date" id="rg-date" style="max-width:200px">
+        <div class="f-row" style="margin-bottom:14px">
+          <label class="f-label">Date Played</label>
+          <input class="f-input" type="date" id="rg-date" style="max-width:200px">
         </div>
-        <button class="btn-primary" onclick="addResult()">Save Result</button>
+        <button class="btn-p" onclick="addResult()">Save Result</button>
       </div>
+    </div>
 
-      <div class="admin-section">
-        <div class="admin-section-title">Playoff Results</div>
-        <div id="playoff-admin-selects"></div>
-      </div>
+    <div class="a-section">
+      <div class="a-hdr"><span>Playoff Series Results</span></div>
+      <div class="a-body" id="po-admin-body"></div>
+    </div>
 
-      <div class="admin-section">
-        <div class="admin-section-title">Manage Schedule</div>
-        <div id="admin-sched-manage"></div>
-      </div>
+    <div class="a-section">
+      <div class="a-hdr"><span>Manage Schedule</span></div>
+      <div class="a-body" id="manage-sched"></div>
+    </div>
 
-      <div class="admin-section">
-        <div class="admin-section-title">Manage Results</div>
-        <div id="admin-results-manage"></div>
-      </div>
+    <div class="a-section">
+      <div class="a-hdr"><span>Manage Results</span></div>
+      <div class="a-body" id="manage-res"></div>
+    </div>
 
-      <div class="admin-section" style="border-color:#ff4455">
-        <div class="admin-section-title" style="color:var(--red)">Danger Zone</div>
-        <button class="btn-danger" style="font-size:13px;padding:8px 18px" onclick="resetAll()">Reset All Data</button>
+    <div class="a-section">
+      <div class="a-hdr red"><span>Danger Zone</span></div>
+      <div class="a-body">
+        <button class="btn-d" style="font-size:13px;padding:9px 20px" onclick="resetAll()">Reset All Data</button>
       </div>
     </div>
   </div>
-
 </div>
+
+</main>
 <div class="toast" id="toast"></div>
 
 <script>
-const ADMIN_CODE = '1243';
-const SK = 'bhjv2v2_';
-let adminUnlocked = false;
+const CODE='1243',SK='bhjv2_';
+let unlocked=false;
 
-function ld(k){ try{ return JSON.parse(localStorage.getItem(SK+k)); }catch(e){ return null; } }
-function sv(k,v){ try{ localStorage.setItem(SK+k, JSON.stringify(v)); }catch(e){} }
+function ld(k){try{return JSON.parse(localStorage.getItem(SK+k))}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(SK+k,JSON.stringify(v))}catch(e){}}
+function getTeams(){return ld('teams')||['Buckets & Boards','Run & Gun','The Rim Rockers','Zone Busters','Full Court Press','Splash Bros','Pick & Roll','Hoops Dynasty']}
+function getSched(){return ld('sched')||[]}
+function getRes(){return ld('res')||[]}
+function getPO(){return ld('po')||{}}
 
-function getTeams(){ return ld('teams') || ['Buckets & Boards','Run & Gun','The Rim Rockers','Zone Busters','Full Court Press','Splash Bros','Pick & Roll','Hoops Dynasty']; }
-function getSchedule(){ return ld('schedule') || []; }
-function getResults(){ return ld('results') || []; }
-function getPR(){ return ld('playoff_results') || {}; }
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500)}
 
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2500);
+function showTab(t){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+t).classList.add('active');
+  const nb=document.getElementById('nav-'+t);if(nb)nb.classList.add('active');
+  if(t==='standings')renderStandings();
+  if(t==='schedule')renderSchedule();
+  if(t==='results')renderResults();
+  if(t==='bracket')renderBracket();
+  if(t==='admin'&&unlocked)renderAdminPanel();
 }
+function goAdmin(){document.getElementById('nav-admin').style.display='';showTab('admin')}
 
-function showTab(name){
-  document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  const nb = document.getElementById('nav-'+name);
-  if(nb) nb.classList.add('active');
-  if(name==='standings') renderStandings();
-  if(name==='schedule') renderSchedule();
-  if(name==='results') renderResults();
-  if(name==='bracket') renderBracket();
-  if(name==='admin' && adminUnlocked) renderAdminPanel();
-}
-
-function goAdmin(){
-  document.getElementById('nav-admin').style.display='';
-  showTab('admin');
-}
-
-// STANDINGS
-function computeStandings(){
-  const teams=getTeams(), results=getResults();
-  const map={};
-  teams.forEach(t=>{ map[t]={name:t,w:0,l:0,pf:0,pa:0}; });
-  results.forEach(r=>{
-    if(!map[r.t1]) map[r.t1]={name:r.t1,w:0,l:0,pf:0,pa:0};
-    if(!map[r.t2]) map[r.t2]={name:r.t2,w:0,l:0,pf:0,pa:0};
-    const s1=parseInt(r.s1)||0, s2=parseInt(r.s2)||0;
-    map[r.t1].pf+=s1; map[r.t1].pa+=s2;
-    map[r.t2].pf+=s2; map[r.t2].pa+=s1;
-    if(s1>s2){map[r.t1].w++;map[r.t2].l++;}
-    else if(s2>s1){map[r.t2].w++;map[r.t1].l++;}
-    else{map[r.t1].w+=0.5;map[r.t2].w+=0.5;}
+/* STANDINGS */
+function calcStandings(){
+  const teams=getTeams(),res=getRes(),map={};
+  teams.forEach(t=>{map[t]={name:t,w:0,l:0,pf:0,pa:0}});
+  res.forEach(r=>{
+    if(!map[r.t1])map[r.t1]={name:r.t1,w:0,l:0,pf:0,pa:0};
+    if(!map[r.t2])map[r.t2]={name:r.t2,w:0,l:0,pf:0,pa:0};
+    const s1=parseInt(r.s1)||0,s2=parseInt(r.s2)||0;
+    map[r.t1].pf+=s1;map[r.t1].pa+=s2;
+    map[r.t2].pf+=s2;map[r.t2].pa+=s1;
+    if(s1>s2){map[r.t1].w++;map[r.t2].l++}
+    else if(s2>s1){map[r.t2].w++;map[r.t1].l++}
+    else{map[r.t1].w+=.5;map[r.t2].w+=.5}
   });
   return Object.values(map).sort((a,b)=>{
-    const ga=a.w+a.l,gb=b.w+b.l;
-    const pa=ga?a.w/ga:0,pb=gb?b.w/gb:0;
-    if(pb!==pa) return pb-pa;
-    return (b.pf-b.pa)-(a.pf-a.pa);
+    const ga=a.w+a.l,gb=b.w+b.l,pa=ga?a.w/ga:0,pb=gb?b.w/gb:0;
+    if(pb!==pa)return pb-pa;
+    return(b.pf-b.pa)-(a.pf-a.pa);
   });
 }
 
 function renderStandings(){
-  const rows=computeStandings();
-  document.getElementById('standings-body').innerHTML=rows.map((t,i)=>{
-    const gp=t.w+t.l;
-    const raw=gp?t.w/gp:0;
-    const pct=gp===0?'.---':raw===1?'1.000':('.'+raw.toFixed(3).slice(2));
-    const diff=t.pf-t.pa;
-    const ds=diff>0?'+'+diff:diff===0?'—':String(diff);
-    const dc=diff>0?'diff-pos':diff<0?'diff-neg':'';
-    return `<tr><td class="rank-cell tleft">${i+1}</td><td class="tleft team-name-cell">${t.name}</td><td class="wins-cell">${t.w%1===0?t.w:t.w.toFixed(1)}</td><td class="loss-cell">${t.l%1===0?t.l:t.l.toFixed(1)}</td><td class="pct-cell">${pct}</td><td>${t.pf}</td><td>${t.pa}</td><td class="${dc}">${ds}</td></tr>`;
+  const rows=calcStandings();
+  document.getElementById('s-body').innerHTML=rows.map((t,i)=>{
+    const gp=t.w+t.l,raw=gp?t.w/gp:0;
+    const pct=gp===0?'—':raw===1?'1.000':'.'+raw.toFixed(3).slice(2);
+    const d=t.pf-t.pa,ds=d>0?'+'+d:d===0?'—':String(d);
+    const dc=d>0?'pos-td':d<0?'neg-td':'';
+    const wv=t.w%1===0?t.w:t.w.toFixed(1),lv=t.l%1===0?t.l:t.l.toFixed(1);
+    return`<tr class="rank-${i+1}">
+      <td class="tl"><div class="rank-wrap"><div class="rank-num">${i+1}</div></div></td>
+      <td class="tl"><span class="team-cell-name">${t.name}</span></td>
+      <td class="w-td">${wv}</td>
+      <td class="l-td">${lv}</td>
+      <td class="pct-td">${pct}</td>
+      <td>${t.pf}</td><td>${t.pa}</td>
+      <td class="${dc}">${ds}</td>
+    </tr>`;
   }).join('');
 }
 
-// SCHEDULE
+/* HELPERS */
 function fmtDate(d){
-  if(!d) return '—';
+  if(!d)return'—';
   const dt=new Date(d+'T12:00:00');
-  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]+' '+dt.getDate();
+  return['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]+' '+dt.getDate();
 }
 function fmtTime(t){
-  if(!t) return 'TBD';
-  const [h,m]=t.split(':'); const hr=parseInt(h);
-  return (hr>12?hr-12:hr||12)+':'+m+(hr>=12?' PM':' AM');
+  if(!t)return'TBD';
+  const[h,m]=t.split(':'),hr=parseInt(h);
+  return(hr>12?hr-12:hr||12)+':'+m+(hr>=12?' PM':' AM');
 }
 
+/* SCHEDULE */
 function renderSchedule(){
-  const sched=getSchedule().sort((a,b)=>a.date>b.date?1:-1);
-  const el=document.getElementById('schedule-list');
-  if(!sched.length){el.innerHTML='<div class="empty-state">// NO GAMES SCHEDULED YET</div>';return;}
-  el.innerHTML=sched.map(g=>`<div class="game-row"><div class="game-date-col">${fmtDate(g.date)}</div><div class="game-teams-col">${g.t1}<span class="game-vs">vs</span>${g.t2}</div><div class="game-time-badge">${fmtTime(g.time)}</div></div>`).join('');
-}
-
-function renderResults(){
-  const results=getResults().sort((a,b)=>b.date>a.date?1:-1);
-  const el=document.getElementById('results-list');
-  if(!results.length){el.innerHTML='<div class="empty-state">// NO RESULTS YET</div>';return;}
-  el.innerHTML=results.map(r=>{
-    const s1=parseInt(r.s1),s2=parseInt(r.s2);
-    return `<div class="game-row"><div class="game-date-col">${fmtDate(r.date)}</div><div class="game-teams-col"><span class="${s1>s2?'winner-highlight':''}">${r.t1}</span><span class="game-vs">vs</span><span class="${s2>s1?'winner-highlight':''}">${r.t2}</span></div><div class="game-score-badge">${r.s1} – ${r.s2}</div></div>`;
+  const sched=getSched().slice().sort((a,b)=>(a.dayLabel||'')>(b.dayLabel||'')?1:(a.dayLabel||'')<(b.dayLabel||'')?-1:(a.date||'')>(b.date||'')?1:-1);
+  const el=document.getElementById('sched-list');
+  if(!sched.length){el.innerHTML='<div class="empty">No games scheduled yet</div>';return;}
+  const groups={};
+  sched.forEach(g=>{const k=g.dayLabel||'Games';if(!groups[k])groups[k]=[];groups[k].push(g)});
+  let gn=1;
+  el.innerHTML=Object.entries(groups).map(([lbl,games])=>{
+    const fd=games[0]?.date;
+    const gHtml=games.map(g=>`<div class="sched-card"><div class="sched-num">G${gn++}</div><div class="sched-main"><div class="sched-teams">${g.t1}<span class="sched-vs">vs</span>${g.t2}</div><div class="sched-time">${fmtTime(g.time)}</div></div></div>`).join('');
+    return`<div class="day-group"><div class="day-hdr"><div class="day-chip">${lbl}</div>${fd?`<span class="day-chip-date">${fmtDate(fd)}</span>`:''}<div class="day-rule"></div></div>${gHtml}</div>`;
   }).join('');
 }
 
-// BRACKET — 8-team single elimination
-// Seeds: 1v8, 4v5, 2v7, 3v6  → Semis → Final → Champion
+/* RESULTS */
+function renderResults(){
+  const res=getRes().slice().sort((a,b)=>b.date>a.date?1:-1);
+  const el=document.getElementById('res-list');
+  if(!res.length){el.innerHTML='<div class="empty">No results yet</div>';return;}
+  el.innerHTML=res.map(r=>{
+    const s1=parseInt(r.s1),s2=parseInt(r.s2);
+    return`<div class="res-card"><div class="res-date-strip">${fmtDate(r.date)}</div><div class="res-main"><div class="res-teams"><span class="${s1>s2?'win-nm':'loss-nm'}">${r.t1}</span><span class="res-vs">vs</span><span class="${s2>s1?'win-nm':'loss-nm'}">${r.t2}</span></div><div class="score-pill">${r.s1} – ${r.s2}</div></div></div>`;
+  }).join('');
+}
+
+/* SERIES LOGIC */
+// po['series_KEY'] = array of team names who won each game e.g. ['TeamA','TeamB','TeamA']
+function getSeriesWins(key,t1,t2){
+  const games=(getPO()['series_'+key]||[]);
+  return{w1:games.filter(g=>g===t1).length,w2:games.filter(g=>g===t2).length,total:games.length};
+}
+function seriesWinner(key,t1,t2,needed){
+  if(!t1||!t2)return'';
+  const{w1,w2}=getSeriesWins(key,t1,t2);
+  if(w1>=needed)return t1;
+  if(w2>=needed)return t2;
+  return'';
+}
+function addSeriesGame(key,winner){
+  const po=getPO();
+  if(!po['series_'+key])po['series_'+key]=[];
+  po['series_'+key].push(winner);
+  sv('po',po);renderBracket();if(unlocked)renderPoAdmin();toast('Game recorded!');
+}
+function removeLastSeriesGame(key){
+  const po=getPO();
+  if(po['series_'+key]&&po['series_'+key].length>0){po['series_'+key].pop();sv('po',po);}
+  renderBracket();if(unlocked)renderPoAdmin();toast('Last game removed');
+}
+
+/* BRACKET */
 function renderBracket(){
-  const standings=computeStandings();
-  const s=standings.map(t=>t.name);
-  // Pad to 8
-  while(s.length<8) s.push('TBD');
-  const pr=getPR();
+  const seeds=calcStandings().map(t=>t.name);
+  while(seeds.length<8)seeds.push('TBD');
+  const po=getPO();
 
-  // QF matchups: [seed1, seed2, round_key]
-  const qf=[
-    [s[0],s[7],'qf1'],
-    [s[3],s[4],'qf2'],
-    [s[1],s[6],'qf3'],
-    [s[2],s[5],'qf4'],
+  const qfM=[
+    {key:'qf1',t1:seeds[0],t2:seeds[7],s1:1,s2:8,needed:2},
+    {key:'qf2',t1:seeds[3],t2:seeds[4],s1:4,s2:5,needed:2},
+    {key:'qf3',t1:seeds[1],t2:seeds[6],s1:2,s2:7,needed:2},
+    {key:'qf4',t1:seeds[2],t2:seeds[5],s1:3,s2:6,needed:2},
   ];
-  const sf=[
-    [pr.qf1||'',pr.qf2||'','sf1'],
-    [pr.qf3||'',pr.qf4||'','sf2'],
+  const qfW=qfM.map(m=>seriesWinner(m.key,m.t1,m.t2,m.needed));
+  const sfM=[
+    {key:'sf1',t1:qfW[0]||'',t2:qfW[1]||'',needed:2},
+    {key:'sf2',t1:qfW[2]||'',t2:qfW[3]||'',needed:2},
   ];
-  const fin=[pr.sf1||'',pr.sf2||'','final'];
-  const champ=pr.final||'';
+  const sfW=sfM.map(m=>seriesWinner(m.key,m.t1,m.t2,m.needed));
+  const finM={key:'final',t1:sfW[0]||'',t2:sfW[1]||'',needed:3};
+  const champ=seriesWinner('final',finM.t1,finM.t2,3);
 
-  function bTeam(name, winnerName, seed){
-    if(!name) return `<div class="b-team tbd"><span class="b-seed">${seed||''}</span>TBD</div>`;
-    const isW = winnerName && name===winnerName;
-    return `<div class="b-team ${isW?'winner':''}"><span class="b-seed">${seed||''}</span>${name}</div>`;
+  function bt(name,key,isT1,seed,winner,isFinal,needed){
+    const tbd=!name||name==='TBD';
+    if(tbd){
+      return`<div class="b-team-row tbd">
+        <div class="b-team-left">
+          ${seed?`<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);min-width:12px;flex-shrink:0">${seed}</span>`:''}
+          <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;font-style:italic;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">TBD</span>
+        </div>
+      </div>`;
+    }
+    const isWinner=winner&&name===winner;
+    const cls=isWinner?(isFinal?'winner-red':'winner'):'';
+    const allGames=(getPO()['series_'+key]||[]);
+    const myWins=allGames.filter(g=>g===name).length;
+    const showWins=myWins>0||!!winner;
+    const winColor=isWinner?'#fff':(isFinal?'var(--nba-red)':'var(--nba-blue)');
+    const seedSpan=seed?`<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:${isWinner?'rgba(255,255,255,0.5)':'var(--text3)'};min-width:12px;flex-shrink:0">${seed}</span>`:'';
+    return`<div class="b-team-row ${cls}">
+      <div class="b-team-left">
+        ${seedSpan}
+        <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:${isWinner?'#fff':'var(--text)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span>
+      </div>
+      ${showWins?`<span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:${winColor};flex-shrink:0;min-width:16px;text-align:right">${myWins}</span>`:''}
+    </div>`;
+  }
+  function seriesLine(key,t1,t2,needed){
+    if(!t1||!t2||t1==='TBD'||t2==='TBD')return`<div class="b-series-divider"></div>`;
+    const{w1,w2}=getSeriesWins(key,t1,t2);
+    const w=seriesWinner(key,t1,t2,needed);
+    const bo=needed*2-1;
+    if(w) return`<div class="b-series-divider"></div>`;
+    if(w1>0||w2>0) return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--nba-blue);font-weight:700;letter-spacing:.5px;padding:2px 0 4px">Series tied ${w1}-${w2}</div>`;
+    return`<div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.5px;padding:2px 0 4px">Best of ${bo}</div>`;
   }
 
-  // Heights for alignment: QF has 8 slots, SF has 4, F has 2
-  const slotH = 52; // px per team slot
-  const qfH = 8*slotH; // 416px total
-  const sfH = qfH;
-  const fH = qfH;
+  const slotH=60,qfH=8*slotH;
 
-  let html = `<div class="bracket-wrap">`;
+  let h=`<div class="bracket-grid">`;
 
-  // QUARTERFINALS
-  html += `<div class="b-round" style="height:${qfH}px">
-    <div class="b-round-label">Quarterfinals</div>
-    <div style="display:flex;flex-direction:column;height:${qfH-28}px;justify-content:space-around">`;
-  const seedMap=[[1,8],[4,5],[2,7],[3,6]];
-  qf.forEach(([t1,t2,key],i)=>{
-    const w=pr[key]||'';
-    html+=`<div class="b-matchup">${bTeam(t1,w,seedMap[i][0])}${bTeam(t2,w,seedMap[i][1])}</div>`;
+  // QF
+  h+=`<div class="b-col"><div class="b-col-hdr">Quarterfinals</div><div class="b-col-sub">Best of 3</div>
+    <div class="b-body" style="height:${qfH}px">`;
+  qfM.forEach(m=>{
+    const w=qfW[qfM.indexOf(m)]||'';
+    h+=`<div class="b-matchup">${bt(m.t1,m.key,true,m.s1,w,false,m.needed)}${bt(m.t2,m.key,false,m.s2,w,false,m.needed)}${seriesLine(m.key,m.t1,m.t2,m.needed)}</div>`;
   });
-  html+=`</div></div>`;
+  h+=`</div></div>`;
 
-  // Connector QF→SF
-  html+=`<svg width="32" height="${qfH}" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;margin-top:28px">
-    <path d="M0,${slotH*0.75} H16 V${slotH*1.75} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-    <path d="M0,${slotH*3.75} H16 V${slotH*2.75} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-    <path d="M0,${slotH*4.75} H16 V${slotH*5.75} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-    <path d="M0,${slotH*7.25} H16 V${slotH*6.25} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-  </svg>`;
+  // Conn QF→SF
+  const cv=[.75,2.25,4.75,6.25].map(v=>v*slotH);
+  h+=`<div class="conn"><svg width="20" height="${qfH}" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,${cv[0]} H10 V${(cv[0]+cv[1])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+    <path d="M0,${cv[1]} H10 V${(cv[0]+cv[1])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+    <path d="M0,${cv[2]} H10 V${(cv[2]+cv[3])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+    <path d="M0,${cv[3]} H10 V${(cv[2]+cv[3])/2} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+  </svg></div>`;
 
-  // SEMIFINALS
-  html+=`<div class="b-round" style="height:${sfH}px">
-    <div class="b-round-label">Semifinals</div>
-    <div style="display:flex;flex-direction:column;height:${sfH-28}px;justify-content:space-around">`;
-  sf.forEach(([t1,t2,key])=>{
-    const w=pr[key]||'';
-    html+=`<div class="b-matchup">${bTeam(t1,w,'')}${bTeam(t2,w,'')}</div>`;
+  // SF
+  h+=`<div class="b-col"><div class="b-col-hdr">Semifinals</div><div class="b-col-sub">Best of 3</div>
+    <div class="b-body" style="height:${qfH}px">`;
+  sfM.forEach(m=>{
+    const w=sfW[sfM.indexOf(m)]||'';
+    h+=`<div class="b-matchup">${bt(m.t1,m.key,true,'',w,false,m.needed)}${bt(m.t2,m.key,false,'',w,false,m.needed)}${seriesLine(m.key,m.t1,m.t2,m.needed)}</div>`;
   });
-  html+=`</div></div>`;
+  h+=`</div></div>`;
 
-  // Connector SF→Final
-  html+=`<svg width="32" height="${fH}" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;margin-top:28px">
-    <path d="M0,${slotH*1.25} H16 V${fH/2-28} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-    <path d="M0,${slotH*6.75} H16 V${fH/2-28} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-  </svg>`;
+  // Conn SF→Finals
+  const sfC1=qfH*.25,sfC2=qfH*.75,fCtr=qfH/2;
+  h+=`<div class="conn"><svg width="20" height="${qfH}" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,${sfC1} H10 V${fCtr} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+    <path d="M0,${sfC2} H10 V${fCtr} H20" stroke="#c0c8e0" stroke-width="1.5" fill="none"/>
+  </svg></div>`;
 
-  // FINALS
-  const fw=pr.final||'';
-  html+=`<div class="b-round" style="height:${fH}px">
-    <div class="b-round-label">Championship</div>
-    <div style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:${fH-28}px">
-      ${bTeam(pr.sf1||'',fw,'')}
-      <div style="height:10px"></div>
-      ${bTeam(pr.sf2||'',fw,'')}
-    </div>
-  </div>`;
-
-  // Connector Final→Champ
-  html+=`<svg width="32" height="${fH}" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;margin-top:28px">
-    <path d="M0,${fH/2-42} H16 V${fH/2-28} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-    <path d="M0,${fH/2-14} H16 V${fH/2-28} H32" stroke="#333355" stroke-width="1.5" fill="none"/>
-  </svg>`;
-
-  // CHAMPION
-  html+=`<div class="b-round" style="height:${fH}px">
-    <div class="b-round-label">Champion</div>
-    <div style="display:flex;align-items:center;justify-content:center;height:${fH-28}px">
-      <div class="champ-box">
-        <div class="champ-label">🏆 Champion</div>
-        <div class="champ-name">${champ||'—'}</div>
+  // Finals
+  h+=`<div class="b-col"><div class="b-col-hdr finals">Finals</div><div class="b-col-sub finals">Best of 5</div>
+    <div class="b-body finals" style="height:${qfH}px;justify-content:center">
+      <div class="b-matchup" style="padding:16px 0">
+        ${bt(finM.t1,'final',true,'',champ,true,finM.needed)}${bt(finM.t2,'final',false,'',champ,true,finM.needed)}
+        ${seriesLine('final',finM.t1,finM.t2,finM.needed)}
+        <div style="margin:12px 8px 4px;background:${champ?'var(--nba-blue)':'#f0f2f8'};border:${champ?'2px solid var(--nba-blue)':'2px dashed var(--border2)'};padding:14px 12px;text-align:center">
+          <div style="font-size:24px;margin-bottom:6px">🏆</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:${champ?'rgba(255,255,255,0.55)':'var(--text3)'};margin-bottom:4px">2026 Champion</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${champ?'#fff':'var(--text3)'};word-break:break-word;line-height:1.2">${champ||'—'}</div>
+        </div>
       </div>
     </div>
   </div>`;
 
-  html+=`</div>`;
+  h+=`</div>`;
+  document.getElementById('bracket-view').innerHTML=h;
+}
 
-  // Admin playoff controls (only shown when unlocked)
-  if(adminUnlocked){
-    html+=`<div class="playoff-admin-box">
-      <div class="playoff-admin-title">// ADMIN: SET PLAYOFF RESULTS</div>
-      <div class="playoff-selects">`;
-    const qfLabels=[`QF1: 1 vs 8`,`QF2: 4 vs 5`,`QF3: 2 vs 7`,`QF4: 3 vs 6`];
-    qf.forEach(([t1,t2,key],i)=>{
-      const cur=pr[key]||'';
-      html+=`<div><label class="form-label">${qfLabels[i]}</label>
-        <select class="form-select" onchange="setPR('${key}',this.value)">
-          <option value="">— Pick Winner —</option>
-          <option value="${t1}" ${cur===t1?'selected':''}>${t1||'TBD'}</option>
-          <option value="${t2}" ${cur===t2?'selected':''}>${t2||'TBD'}</option>
-        </select></div>`;
-    });
-    const sf1w=pr.qf1||'', sf2w=pr.qf2||'', sf3w=pr.qf3||'', sf4w=pr.qf4||'';
-    const sfLabels=['SF1: QF1W vs QF2W','SF2: QF3W vs QF4W'];
-    [[sf1w,sf2w,'sf1'],[sf3w,sf4w,'sf2']].forEach(([t1,t2,key],i)=>{
-      const cur=pr[key]||'';
-      html+=`<div><label class="form-label">${sfLabels[i]}</label>
-        <select class="form-select" onchange="setPR('${key}',this.value)">
-          <option value="">— Pick Winner —</option>
-          ${t1?`<option value="${t1}" ${cur===t1?'selected':''}>${t1}</option>`:''}
-          ${t2?`<option value="${t2}" ${cur===t2?'selected':''}>${t2}</option>`:''}
-        </select></div>`;
-    });
-    const fina1=pr.sf1||'', fina2=pr.sf2||'';
-    const curF=pr.final||'';
-    html+=`<div><label class="form-label">Final: SF1W vs SF2W</label>
-      <select class="form-select" onchange="setPR('final',this.value)">
-        <option value="">— Pick Winner —</option>
-        ${fina1?`<option value="${fina1}" ${curF===fina1?'selected':''}>${fina1}</option>`:''}
-        ${fina2?`<option value="${fina2}" ${curF===fina2?'selected':''}>${fina2}</option>`:''}
-      </select></div>`;
-    html+=`</div></div>`;
+/* ADMIN PLAYOFF PANEL */
+function renderPoAdmin(){
+  const seeds=calcStandings().map(t=>t.name);
+  while(seeds.length<8)seeds.push('TBD');
+  const qfW=[
+    seriesWinner('qf1',seeds[0],seeds[7],2),
+    seriesWinner('qf2',seeds[3],seeds[4],2),
+    seriesWinner('qf3',seeds[1],seeds[6],2),
+    seriesWinner('qf4',seeds[2],seeds[5],2),
+  ];
+  const sfW=[
+    seriesWinner('sf1',qfW[0]||'',qfW[1]||'',2),
+    seriesWinner('sf2',qfW[2]||'',qfW[3]||'',2),
+  ];
+
+  const allSeries=[
+    {key:'qf1',label:'QF1 — Seed 1 vs 8',t1:seeds[0],t2:seeds[7],needed:2},
+    {key:'qf2',label:'QF2 — Seed 4 vs 5',t1:seeds[3],t2:seeds[4],needed:2},
+    {key:'qf3',label:'QF3 — Seed 2 vs 7',t1:seeds[1],t2:seeds[6],needed:2},
+    {key:'qf4',label:'QF4 — Seed 3 vs 6',t1:seeds[2],t2:seeds[5],needed:2},
+    {key:'sf1',label:'SF1 — QF1W vs QF2W',t1:qfW[0]||'',t2:qfW[1]||'',needed:2},
+    {key:'sf2',label:'SF2 — QF3W vs QF4W',t1:qfW[2]||'',t2:qfW[3]||'',needed:2},
+    {key:'final',label:'Finals',t1:sfW[0]||'',t2:sfW[1]||'',needed:3},
+  ];
+
+  const el=document.getElementById('po-admin-body');
+  el.innerHTML=allSeries.map(s=>{
+    const{w1,w2,total}=getSeriesWins(s.key,s.t1,s.t2);
+    const winner=seriesWinner(s.key,s.t1,s.t2,s.needed);
+    const maxGames=s.needed*2-1;
+    const canAdd=!winner&&total<maxGames&&s.t1&&s.t2&&s.t1!=='TBD'&&s.t2!=='TBD';
+    const t1Label=s.t1||'TBD',t2Label=s.t2||'TBD';
+    return`<div class="series-block">
+      <div class="series-block-title">${s.label} &nbsp;<span style="font-weight:400;font-size:11px;color:var(--text3)">${winner?'✓ '+winner+' wins':'Series: '+w1+'-'+w2+(total>0?' ('+total+' played)':'')}</span></div>
+      ${canAdd?`
+      <div class="game-win-row">
+        <span class="game-win-lbl">Game ${total+1}:</span>
+        <button class="btn-p" style="padding:6px 14px;font-size:12px" onclick="addSeriesGame('${s.key}','${s.t1}')">${t1Label} wins</button>
+        <button class="btn-p" style="padding:6px 14px;font-size:12px;background:var(--nba-red)" onclick="addSeriesGame('${s.key}','${s.t2}')">${t2Label} wins</button>
+      </div>`:''}
+      ${total>0?`<button class="btn-d" style="margin-top:4px" onclick="removeLastSeriesGame('${s.key}')">Undo last game</button>`:''}
+      ${!s.t1||s.t1==='TBD'?`<p style="font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace">Waiting for previous round...</p>`:''}
+    </div>`;
+  }).join('');
+}
+
+/* ADMIN PIN */
+function pi(el,n){
+  if(el.value.length===1&&n<4)document.getElementById('p'+(n+1)).focus();
+  if(n===4&&el.value.length===1)checkPin();
+  el.classList.toggle('on',el.value.length>0);
+}
+function pk(e,n){
+  if(e.key==='Backspace'&&document.getElementById('p'+n).value===''&&n>1){
+    const p=document.getElementById('p'+(n-1));p.value='';p.classList.remove('on');p.focus();
   }
-
-  document.getElementById('bracket-view').innerHTML=html;
-}
-
-function setPR(key,val){
-  const pr=getPR(); pr[key]=val; sv('playoff_results',pr);
-  renderBracket(); toast('Bracket updated!');
-}
-
-// ADMIN PIN
-function pinInput(el,num){
-  if(el.value.length===1 && num<4) document.getElementById('pin'+(num+1)).focus();
-  if(num===4 && el.value.length===1) checkPin();
-  el.classList.toggle('filled',el.value.length>0);
-}
-function pinKey(e,num){
-  if(e.key==='Backspace' && document.getElementById('pin'+num).value==='' && num>1){
-    const prev=document.getElementById('pin'+(num-1));
-    prev.value=''; prev.classList.remove('filled'); prev.focus();
-  }
-  if(e.key==='Enter') checkPin();
+  if(e.key==='Enter')checkPin();
 }
 function checkPin(){
-  const code=[1,2,3,4].map(i=>document.getElementById('pin'+i).value).join('');
-  if(code===ADMIN_CODE){
-    adminUnlocked=true;
-    document.getElementById('admin-locked-screen').style.display='none';
-    document.getElementById('admin-panel').style.display='block';
-    document.getElementById('admin-toggle-btn').classList.add('active');
-    renderAdminPanel();
-    toast('Admin access granted');
-  } else {
-    document.getElementById('pin-error').textContent='// INCORRECT CODE';
-    [1,2,3,4].forEach(i=>{ const el=document.getElementById('pin'+i); el.value=''; el.classList.remove('filled'); });
-    document.getElementById('pin1').focus();
-    setTimeout(()=>document.getElementById('pin-error').textContent='',2000);
+  const code=[1,2,3,4].map(i=>document.getElementById('p'+i).value).join('');
+  if(code===CODE){
+    unlocked=true;
+    document.getElementById('lock-screen').style.display='none';
+    document.getElementById('a-panel').style.display='block';
+    document.getElementById('admin-pill').classList.add('active');
+    renderAdminPanel();toast('Admin access granted');
+  }else{
+    document.getElementById('pin-err').textContent='Incorrect code';
+    [1,2,3,4].forEach(i=>{const el=document.getElementById('p'+i);el.value='';el.classList.remove('on')});
+    document.getElementById('p1').focus();
+    setTimeout(()=>document.getElementById('pin-err').textContent='',2000);
   }
 }
 function lockAdmin(){
-  adminUnlocked=false;
-  document.getElementById('admin-locked-screen').style.display='flex';
-  document.getElementById('admin-panel').style.display='none';
-  document.getElementById('admin-toggle-btn').classList.remove('active');
+  unlocked=false;
+  document.getElementById('lock-screen').style.display='flex';
+  document.getElementById('a-panel').style.display='none';
+  document.getElementById('admin-pill').classList.remove('active');
   document.getElementById('nav-admin').style.display='none';
-  [1,2,3,4].forEach(i=>{ const el=document.getElementById('pin'+i); el.value=''; el.classList.remove('filled'); });
+  [1,2,3,4].forEach(i=>{const el=document.getElementById('p'+i);el.value='';el.classList.remove('on')});
   showTab('standings');
 }
 
 function renderAdminPanel(){
   const teams=getTeams();
-  document.getElementById('team-name-grid').innerHTML=teams.map((t,i)=>
-    `<div><label class="form-label">Team ${i+1}</label><input class="form-input team-name-inp" value="${t}" placeholder="Team ${i+1}"></div>`
+  document.getElementById('team-grid').innerHTML=teams.map((t,i)=>
+    `<div><label class="f-label">Team ${i+1}</label><input class="f-input team-inp" value="${t}" placeholder="Team ${i+1}"></div>`
   ).join('');
   ['sg-t1','sg-t2','rg-t1','rg-t2'].forEach(id=>{
     document.getElementById(id).innerHTML=teams.map(t=>`<option value="${t}">${t}</option>`).join('');
@@ -597,90 +718,57 @@ function renderAdminPanel(){
   const today=new Date().toISOString().split('T')[0];
   document.getElementById('sg-date').value=today;
   document.getElementById('rg-date').value=today;
-  renderAdminSchedule();
-  renderAdminResults();
-  renderBracket();
+  renderManageSched();
+  renderManageRes();
+  renderPoAdmin();
 }
 
-function saveTeamNames(){
-  const inputs=document.querySelectorAll('.team-name-inp');
-  const names=Array.from(inputs).map(i=>i.value.trim()).filter(Boolean);
+function saveTeams(){
+  const names=Array.from(document.querySelectorAll('.team-inp')).map(i=>i.value.trim()).filter(Boolean);
   if(names.length!==8){toast('Need exactly 8 team names');return;}
-  sv('teams',names);
-  renderAdminPanel();
-  renderStandings();
-  toast('Team names saved!');
+  sv('teams',names);renderAdminPanel();renderStandings();toast('Team names saved!');
 }
-
-function addScheduledGame(){
-  const t1=document.getElementById('sg-t1').value;
-  const t2=document.getElementById('sg-t2').value;
-  const date=document.getElementById('sg-date').value;
-  const time=document.getElementById('sg-time').value;
+function addGame(){
+  const t1=document.getElementById('sg-t1').value,t2=document.getElementById('sg-t2').value;
+  const date=document.getElementById('sg-date').value,time=document.getElementById('sg-time').value;
+  const dayLabel=document.getElementById('sg-day').value.trim()||'Day 1';
   if(t1===t2){toast('Teams must be different');return;}
-  if(!date){toast('Please pick a date');return;}
-  const sched=getSchedule();
-  sched.push({id:Date.now(),t1,t2,date,time});
-  sv('schedule',sched);
-  renderAdminSchedule();
-  toast('Game added to schedule!');
+  if(!date){toast('Pick a date');return;}
+  const s=getSched();s.push({id:Date.now(),t1,t2,date,time,dayLabel});
+  sv('sched',s);renderManageSched();toast('Game added!');
 }
-
-function deleteGame(id){
-  sv('schedule',getSchedule().filter(g=>g.id!==id));
-  renderAdminSchedule();
-  toast('Game removed');
+function delGame(id){sv('sched',getSched().filter(g=>g.id!==id));renderManageSched();toast('Game removed')}
+function renderManageSched(){
+  const s=getSched().slice().sort((a,b)=>(a.dayLabel||'')>(b.dayLabel||'')?1:-1);
+  const el=document.getElementById('manage-sched');
+  if(!s.length){el.innerHTML='<div style="color:var(--text3);font-size:13px;font-family:\'IBM Plex Mono\',monospace">No scheduled games</div>';return;}
+  el.innerHTML=s.map(g=>`<div class="m-item"><span>${g.dayLabel||'?'} · ${fmtDate(g.date)}${g.time?' '+fmtTime(g.time):''} — ${g.t1} vs ${g.t2}</span><button class="btn-d" onclick="delGame(${g.id})">Remove</button></div>`).join('');
 }
-
-function renderAdminSchedule(){
-  const sched=getSchedule().sort((a,b)=>a.date>b.date?1:-1);
-  const el=document.getElementById('admin-sched-manage');
-  if(!sched.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;font-family:\'IBM Plex Mono\'">No scheduled games</div>';return;}
-  el.innerHTML=sched.map(g=>`<div class="manage-item"><span>${fmtDate(g.date)}${g.time?' · '+fmtTime(g.time):''} — ${g.t1} vs ${g.t2}</span><button class="btn-danger" onclick="deleteGame(${g.id})">Remove</button></div>`).join('');
-}
-
 function addResult(){
-  const t1=document.getElementById('rg-t1').value;
-  const t2=document.getElementById('rg-t2').value;
-  const s1=document.getElementById('rg-s1').value;
-  const s2=document.getElementById('rg-s2').value;
+  const t1=document.getElementById('rg-t1').value,t2=document.getElementById('rg-t2').value;
+  const s1=document.getElementById('rg-s1').value,s2=document.getElementById('rg-s2').value;
   const date=document.getElementById('rg-date').value;
   if(t1===t2){toast('Teams must be different');return;}
   if(s1===''||s2===''){toast('Enter both scores');return;}
   if(!date){toast('Set a date');return;}
-  const results=getResults();
-  results.push({id:Date.now(),t1,t2,s1:parseInt(s1),s2:parseInt(s2),date});
-  sv('results',results);
-  document.getElementById('rg-s1').value='';
-  document.getElementById('rg-s2').value='';
-  renderAdminResults();
-  renderStandings();
-  toast('Result saved!');
+  const res=getRes();res.push({id:Date.now(),t1,t2,s1:parseInt(s1),s2:parseInt(s2),date});
+  sv('res',res);
+  document.getElementById('rg-s1').value='';document.getElementById('rg-s2').value='';
+  renderManageRes();renderStandings();toast('Result saved!');
 }
-
-function deleteResult(id){
-  sv('results',getResults().filter(r=>r.id!==id));
-  renderAdminResults();
-  renderStandings();
-  toast('Result deleted');
+function delRes(id){sv('res',getRes().filter(r=>r.id!==id));renderManageRes();renderStandings();toast('Deleted')}
+function renderManageRes(){
+  const res=getRes().slice().sort((a,b)=>b.date>a.date?1:-1);
+  const el=document.getElementById('manage-res');
+  if(!res.length){el.innerHTML='<div style="color:var(--text3);font-size:13px;font-family:\'IBM Plex Mono\',monospace">No results logged</div>';return;}
+  el.innerHTML=res.map(r=>`<div class="m-item"><span>${fmtDate(r.date)} — ${r.t1} ${r.s1}–${r.s2} ${r.t2}</span><button class="btn-d" onclick="delRes(${r.id})">Delete</button></div>`).join('');
 }
-
-function renderAdminResults(){
-  const results=getResults().sort((a,b)=>b.date>a.date?1:-1);
-  const el=document.getElementById('admin-results-manage');
-  if(!results.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;font-family:\'IBM Plex Mono\'">No results logged</div>';return;}
-  el.innerHTML=results.map(r=>`<div class="manage-item"><span>${fmtDate(r.date)} — ${r.t1} ${r.s1}–${r.s2} ${r.t2}</span><button class="btn-danger" onclick="deleteResult(${r.id})">Delete</button></div>`).join('');
-}
-
 function resetAll(){
-  if(!confirm('Reset ALL league data? This cannot be undone.')) return;
-  ['teams','schedule','results','playoff_results'].forEach(k=>localStorage.removeItem(SK+k));
-  renderStandings();
-  renderAdminPanel();
-  toast('All data reset');
+  if(!confirm('Reset ALL data? Cannot be undone.'))return;
+  ['teams','sched','res','po'].forEach(k=>localStorage.removeItem(SK+k));
+  renderStandings();renderAdminPanel();toast('All data reset');
 }
 
-// INIT
 renderStandings();
 </script>
 </body>
